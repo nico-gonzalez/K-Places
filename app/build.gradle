@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 0
+def versionBuild = 0
+
+android {
+  compileSdkVersion rootProject.androidCompileSdkVersion
+  buildToolsVersion rootProject.androidBuildToolsVersion
+
+  defaultConfig {
+    applicationId "com.edreams.android.workshops.kotlin"
+    minSdkVersion rootProject.androidMinSdkVersion
+    targetSdkVersion rootProject.androidTargetSdkVersion
+    versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
+    versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  def appDependencies = rootProject.ext.appDependencies
+  def appTestDependencies = rootProject.ext.appTestDependencies
+
+  implementation project(":presentation")
+
+  implementation appDependencies.supportV7
+  implementation appDependencies.supportConstraint
+  implementation appDependencies.kotlin
+
+  testImplementation appTestDependencies.junit
+  androidTestImplementation(appTestDependencies.espressoCore, {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+}

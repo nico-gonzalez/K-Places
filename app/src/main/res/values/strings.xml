@@ -1,0 +1,4 @@
+<resources>
+  <string name="app_name">Kotlin-Workshop</string>
+  <string name="hello_kotlin">Hello Kotlin!</string>
+</resources>

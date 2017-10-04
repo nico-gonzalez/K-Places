@@ -1,0 +1,17 @@
+apply plugin: 'kotlin'
+
+dependencies {
+  def presentationDependencies = rootProject.ext.presentationDependencies
+  def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+  implementation project(":domain")
+
+  implementation presentationDependencies.kotlin
+
+  testImplementation presentationTestDependencies.junit
+  testImplementation presentationTestDependencies.kotlinJUnit
+  testImplementation presentationTestDependencies.mockito
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
