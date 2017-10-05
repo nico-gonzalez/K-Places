@@ -32,6 +32,7 @@ dependencies {
   def appDependencies = rootProject.ext.appDependencies
   def appTestDependencies = rootProject.ext.appTestDependencies
 
+  implementation project(":injection")
   implementation project(":presentation")
 
   implementation appDependencies.supportV7

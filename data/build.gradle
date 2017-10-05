@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
   compileSdkVersion 26
@@ -29,6 +31,9 @@ dependencies {
   implementation project(":domain")
 
   implementation dataDependencies.kotlin
+  implementation dataDependencies.gson
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofitGson
 
   testImplementation dataTestDependencies.junit
   testImplementation dataTestDependencies.kotlinJUnit
