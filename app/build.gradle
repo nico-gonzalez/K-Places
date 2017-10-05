@@ -36,6 +36,7 @@ dependencies {
   implementation project(":presentation")
 
   implementation appDependencies.supportV7
+  implementation appDependencies.recyclerView
   implementation appDependencies.supportConstraint
   implementation appDependencies.kotlin
 

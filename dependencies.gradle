@@ -50,6 +50,7 @@ ext {
 
   appDependencies = [kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
                      supportV7        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+                     recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                      supportConstraint: "com.android.support.constraint:constraint-layout:${constraintVersion}"]
 
   appTestDependencies = [junit       : "junit:junit:${jUnitVersion}",

@@ -4,18 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.edreams.android.workshops.kotlin.HomeActivity"
+    android:layout_height="?attr/listPreferredItemHeight"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     >
 
   <TextView
+      android:id="@+id/placeTitle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="@string/hello_kotlin"
+      android:layout_marginLeft="8dp"
+      android:layout_marginStart="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
+      tools:text="eDreams Odigeo"
+      style="@style/TextAppearance.AppCompat.Title"
       />
 
 </android.support.constraint.ConstraintLayout>
