@@ -26,6 +26,16 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  sourceSets {
+    String sharedTestDir = 'src/sharedTest/java'
+    test {
+      java.srcDir sharedTestDir
+    }
+    androidTest {
+      java.srcDir sharedTestDir
+    }
+  }
 }
 
 dependencies {
@@ -36,12 +46,21 @@ dependencies {
   implementation project(":presentation")
 
   implementation appDependencies.supportV7
+  implementation appDependencies.supportDesign
   implementation appDependencies.recyclerView
   implementation appDependencies.supportConstraint
   implementation appDependencies.kotlin
 
   testImplementation appTestDependencies.junit
+  testImplementation appTestDependencies.androidRunner
+  testImplementation appTestDependencies.androidRules
   androidTestImplementation(appTestDependencies.espressoCore, {
     exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  androidTestImplementation(appTestDependencies.espressoContrib, {
+    exclude group: 'com.android.support', module: 'appcompat'
+    exclude group: 'com.android.support', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
   })
 }
