@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.places
+package com.edreams.android.workshops.kotlin.venues
 
 import android.support.test.filters.LargeTest
 import android.support.test.runner.AndroidJUnit4

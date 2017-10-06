@@ -10,7 +10,7 @@ class RestService {
   internal val CLIENT_SECRET = "NXGWTTRJPTCMOZ2IPEIWJYSZVU3SZKSNJCUALHLDFIEHNVDH"
   internal val BUNDLE_VERSION = "20170801"
 
-  val service: Service
+  val service: FoursquareService
 
   init {
     val retrofit = Retrofit.Builder()
@@ -18,6 +18,6 @@ class RestService {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    service = retrofit.create(Service::class.java)
+    service = retrofit.create(FoursquareService::class.java)
   }
 }

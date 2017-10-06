@@ -9,37 +9,29 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ExploreVenuesNetController : ExploreVenuesController {
-
-  private val restService: RestService = RestService()
+class ExploreVenuesNetController(private val restService: RestService) : ExploreVenuesController {
 
   override fun exploreVenues(near: String, listener: ExploreVenueControllerListener) {
-    val call = restService.service.exploreVenues(
-        restService.API_VERSION,
-        restService.CLIENT_ID,
-        restService.CLIENT_SECRET,
-        restService.BUNDLE_VERSION,
-        near, 50, 1)
+    restService.service.exploreVenues(near, 50, venuePhotos = 1)
+        .enqueue(object : Callback<BaseFourSquareResponse> {
+          override fun onResponse(call: Call<BaseFourSquareResponse>,
+              response: Response<BaseFourSquareResponse>) {
 
-    call.enqueue(object : Callback<BaseFourSquareResponse> {
-      override fun onResponse(call: Call<BaseFourSquareResponse>,
-          response: Response<BaseFourSquareResponse>) {
+            response.body()?.let {
+              val fsResponse = it.response
+              val venues = fsResponse.groups[0].items.mapIndexed { _, item ->
+                VenueResponseMapper().map(item.venue)
+              }
 
-        response.body()?.let {
-          val fsResponse = it.response
-          val venues = fsResponse.groups[0].items.mapIndexed { _, item ->
-            VenueResponseMapper().map(item.venue)
+              listener.onGetVenuesSuccessful(venues)
+            } ?: run {
+              listener.onGetVenuesError(Throwable())
+            }
           }
 
-          listener.onGetVenuesSuccessful(venues)
-        } ?: run {
-          listener.onGetVenuesError()
-        }
-      }
-
-      override fun onFailure(call: Call<BaseFourSquareResponse>, t: Throwable) {
-        listener.onGetVenuesError()
-      }
-    })
+          override fun onFailure(call: Call<BaseFourSquareResponse>, t: Throwable) {
+            listener.onGetVenuesError(t)
+          }
+        })
   }
 }

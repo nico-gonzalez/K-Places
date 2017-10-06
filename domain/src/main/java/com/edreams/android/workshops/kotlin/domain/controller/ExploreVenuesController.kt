@@ -8,7 +8,7 @@ interface ExploreVenuesController {
 
   interface ExploreVenueControllerListener {
 
-    fun onGetVenuesSuccessful(venues : List<VenueModel>)
-    fun onGetVenuesError()
+    fun onGetVenuesSuccessful(venues: List<VenueModel>)
+    fun onGetVenuesError(error: Throwable)
   }
 }

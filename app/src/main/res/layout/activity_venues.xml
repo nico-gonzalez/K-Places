@@ -5,11 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.edreams.android.workshops.kotlin.places.PlacesActivity"
+    tools:context="com.edreams.android.workshops.kotlin.venues.VenuesActivity"
     >
 
   <android.support.v7.widget.RecyclerView
-      android:id="@+id/placesRV"
+      android:id="@+id/venuesRV"
       android:layout_width="0dp"
       android:layout_height="0dp"
       app:layout_constraintBottom_toBottomOf="parent"
@@ -17,5 +17,18 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       />
+
+  <android.support.v4.widget.ContentLoadingProgressBar
+      android:id="@+id/progressBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:indeterminate="true"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      style="?android:attr/progressBarStyleLarge"
+      />
+
 
 </android.support.constraint.ConstraintLayout>
