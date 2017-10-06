@@ -1,3 +1,3 @@
-package com.edreams.android.workshops.kotlin.data.pojo
+package com.edreams.android.workshops.kotlin.data.response
 
 class FourSquareResponse(val groups: List<GroupsResponse>)

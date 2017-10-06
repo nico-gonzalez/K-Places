@@ -1,3 +1,3 @@
 package com.edreams.android.workshops.kotlin.domain.model
 
-class VenueModel(val id : String, val name: String)
+class VenueModel(val id : String, val name: String, val rating: Double, val photo: String)

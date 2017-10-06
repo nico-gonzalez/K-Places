@@ -1,10 +1,10 @@
 package com.edreams.android.workshops.kotlin.data.net.controller
 
+import com.edreams.android.workshops.kotlin.data.mapper.VenueResponseMapper
 import com.edreams.android.workshops.kotlin.data.net.service.RestService
-import com.edreams.android.workshops.kotlin.data.pojo.BaseFourSquareResponse
+import com.edreams.android.workshops.kotlin.data.response.BaseFourSquareResponse
 import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController.ExploreVenueControllerListener
-import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +19,7 @@ class ExploreVenuesNetController : ExploreVenuesController {
         restService.CLIENT_ID,
         restService.CLIENT_SECRET,
         restService.BUNDLE_VERSION,
-        near)
+        near, 50, 1)
 
     call.enqueue(object : Callback<BaseFourSquareResponse> {
       override fun onResponse(call: Call<BaseFourSquareResponse>,
@@ -27,13 +27,12 @@ class ExploreVenuesNetController : ExploreVenuesController {
 
         response.body()?.let {
           val fsResponse = it.response
-
           val venues = fsResponse.groups[0].items.mapIndexed { _, item ->
-            VenueModel(item.venue.id, item.venue.name)
+            VenueResponseMapper().map(item.venue)
           }
 
           listener.onGetVenuesSuccessful(venues)
-        }?: run {
+        } ?: run {
           listener.onGetVenuesError()
         }
       }
