@@ -16,7 +16,8 @@ ext {
   supportLibraryVersion = '26.1.0'
   constraintVersion = '1.0.2'
   retrofitVersion = '2.3.0'
-  gson = '2.8.2'
+  gsonVersion = '2.8.2'
+  glideVersion = '4.2.0'
 
   //Testing
   jUnitVersion = '4.12'
@@ -26,10 +27,10 @@ ext {
   hamcrestVersion = '1.3'
   mockitoVersion = '2.10.0'
 
-  dataDependencies = [kotlin          : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                      gson            : "com.google.code.gson:gson:${gson}",
-                      retrofit        : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                      retrofitGson    : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"]
+  dataDependencies = [kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                      gson        : "com.google.code.gson:gson:${gsonVersion}",
+                      retrofit    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                      retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}"]
 
   dataTestDependencies = [junit       : "junit:junit:${jUnitVersion}",
                           kotlinJUnit : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -53,7 +54,9 @@ ext {
                      supportV7        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
                      recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                      supportDesign    : "com.android.support:design:${supportLibraryVersion}",
-                     supportConstraint: "com.android.support.constraint:constraint-layout:${constraintVersion}"]
+                     supportConstraint: "com.android.support.constraint:constraint-layout:${constraintVersion}",
+                     glide            : "com.github.bumptech.glide:glide:${glideVersion}",
+                     glideCompiler    : "com.github.bumptech.glide:compiler:${glideVersion}"]
 
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -65,5 +68,5 @@ ext {
                          hamcrest       : "org.hamcrest:hamcrest-all:${hamcrestVersion}",
                          robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
 
-  injectionDependencies = [kotlin : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
+  injectionDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
 }

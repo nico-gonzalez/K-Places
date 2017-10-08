@@ -17,7 +17,7 @@ class PlacesRobot {
   }
 
   fun checkPlacesAreDisplayed() = apply {
-    onView(ViewMatchers.withId(id.venuesRV)).check(
+    onView(ViewMatchers.withId(id.venuesList)).check(
         matches(hasDescendant(ViewMatchers.withId(id.placeTitle))))
   }
 }

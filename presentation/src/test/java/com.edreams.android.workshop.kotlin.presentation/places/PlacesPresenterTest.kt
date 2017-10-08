@@ -3,8 +3,8 @@ package com.edreams.android.workshop.kotlin.presentation.places
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor.GetVenuesInteractorListener
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
-import com.edreams.android.workshops.kotlin.presentation.places.VenuesPresenter
-import com.edreams.android.workshops.kotlin.presentation.places.VenuesView
+import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
+import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

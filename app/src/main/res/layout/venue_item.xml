@@ -4,23 +4,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="?attr/listPreferredItemHeight"
+    android:layout_height="?attr/listPreferredItemHeightLarge"
     android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
+    tools:layout_editor_absoluteY="81dp"
     >
 
   <TextView
       android:id="@+id/placeTitle"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginLeft="8dp"
+      android:layout_marginBottom="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="8dp"
+      android:ellipsize="end"
+      android:gravity="center_vertical"
+      android:maxLines="2"
+      app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toEndOf="@+id/placeImage"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintVertical_chainStyle="packed"
+      tools:text="eDreams"
+      style="@style/TextAppearance.AppCompat.Title"
+      />
+
+  <ImageView
+      android:id="@+id/placeImage"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_marginBottom="8dp"
       android:layout_marginStart="8dp"
+      android:layout_marginTop="8dp"
+      android:scaleType="centerCrop"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      tools:text="eDreams Odigeo"
-      style="@style/TextAppearance.AppCompat.Title"
+      tools:srcCompat="@mipmap/ic_launcher"
+      />
+
+  <RatingBar
+      android:id="@+id/ratingBar"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="8dp"
+      android:isIndicator="true"
+      android:max="10"
+      android:numStars="10"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/placeTitle"
+      app:layout_constraintTop_toBottomOf="@+id/placeTitle"
+      tools:rating="4.5"
+      style="@style/Widget.AppCompat.RatingBar.Small"
       />
 
 </android.support.constraint.ConstraintLayout>

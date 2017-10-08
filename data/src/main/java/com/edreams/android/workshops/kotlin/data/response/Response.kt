@@ -1,3 +1,3 @@
 package com.edreams.android.workshops.kotlin.data.response
 
-class ItemsResponse(val venue: VenueResponse)
+class Response<out T>(val groups: List<GroupsResponse<T>>)

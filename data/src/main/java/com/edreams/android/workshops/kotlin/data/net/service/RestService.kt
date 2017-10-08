@@ -13,11 +13,10 @@ class RestService {
   val service: FoursquareService
 
   init {
-    val retrofit = Retrofit.Builder()
+    service = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
-
-    service = retrofit.create(FoursquareService::class.java)
+        .create(FoursquareService::class.java)
   }
 }

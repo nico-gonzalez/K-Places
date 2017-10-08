@@ -50,6 +50,7 @@ dependencies {
   implementation appDependencies.recyclerView
   implementation appDependencies.supportConstraint
   implementation appDependencies.kotlin
+  implementation appDependencies.glide
 
   testImplementation appTestDependencies.junit
   testImplementation appTestDependencies.androidRunner
