@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:paddingBottom="8dp"
     >
 
   <ImageView
@@ -23,14 +25,48 @@
       android:id="@+id/venueTitle"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:padding="8dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginTop="8dp"
       android:textAppearance="@style/TextAppearance.AppCompat.Title"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
       app:layout_constraintTop_toBottomOf="@+id/venueImage"
       tools:text="Barcelona"
+      />
+
+  <TextView
+      android:id="@+id/venueAddress"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintEnd_toEndOf="@+id/venueTitle"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toBottomOf="@+id/venueTitle"
+      app:layout_goneMarginTop="0dp"
+      tools:text="Carrer de Bailen 67"
+      style="@style/TextAppearance.AppCompat.Subhead"
+      />
+
+  <TextView
+      android:id="@+id/venuePhone"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:autoLink="phone"
+      app:layout_constraintEnd_toEndOf="@+id/venueAddress"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toBottomOf="@+id/venueAddress"
+      app:layout_goneMarginTop="0dp"
+      tools:text="+34 689 34 34 34"
+      style="@style/TextAppearance.AppCompat.Subhead"
+      />
+
+  <android.support.constraint.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintGuide_begin="16dp"
       />
 
 </android.support.constraint.ConstraintLayout>

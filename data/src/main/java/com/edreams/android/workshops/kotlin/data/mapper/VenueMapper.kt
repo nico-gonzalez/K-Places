@@ -11,7 +11,13 @@ class VenueMapper : Mapper<VenueResponse, VenueModel> {
     return VenueModel(id,
         name,
         rating,
-        buildPhotoUrl(photos.groups[0].items[0]))
+        buildPhotoUrl(photos.groups[0].items[0]),
+        contact.formattedPhone,
+        location.distance,
+        location.formattedAddress,
+        stats.checkinsCount,
+        tips?.get(0)?.text
+    )
 
   }
 

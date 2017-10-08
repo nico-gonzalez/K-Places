@@ -20,6 +20,7 @@ class GetVenuesInteractor(private val controller: ExploreVenuesController) {
 
   interface GetVenuesInteractorListener {
     fun onGetVenuesSuccessful(venues: List<VenueModel>)
+
     fun onGetVenuesError(error: Throwable)
   }
 }

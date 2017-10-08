@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast.LENGTH_SHORT
 import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.R.layout
+import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
 import com.edreams.android.workshops.kotlin.injection.DependencyInjector.provideVenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
@@ -16,7 +17,9 @@ import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
 import com.edreams.android.workshops.kotlin.venues.VenuesAdapter.VenueItemClickListener
 import kotlinx.android.synthetic.main.activity_venues.progressBar
 import kotlinx.android.synthetic.main.activity_venues.venuesList
+import kotlinx.android.synthetic.main.venue_details.view.venueAddress
 import kotlinx.android.synthetic.main.venue_details.view.venueImage
+import kotlinx.android.synthetic.main.venue_details.view.venuePhone
 import kotlinx.android.synthetic.main.venue_details.view.venueTitle
 
 class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
@@ -72,6 +75,16 @@ class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
     bottomSheetView.apply {
       venueTitle.text = venue.title
       venueImage.load(venue.photoUrl)
+      venue.formattedAddress?.let {
+        venueAddress.text = venue.formattedAddress
+      } ?: run {
+        venueAddress.gone()
+      }
+      venue.formattedPhone?.let {
+        venuePhone.text = venue.formattedPhone
+      } ?: run {
+        venuePhone.gone()
+      }
     }
     bottomSheet.show()
   }

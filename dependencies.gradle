@@ -55,8 +55,7 @@ ext {
                      recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
                      supportDesign    : "com.android.support:design:${supportLibraryVersion}",
                      supportConstraint: "com.android.support.constraint:constraint-layout:${constraintVersion}",
-                     glide            : "com.github.bumptech.glide:glide:${glideVersion}",
-                     glideCompiler    : "com.github.bumptech.glide:compiler:${glideVersion}"]
+                     glide            : "com.github.bumptech.glide:glide:${glideVersion}"]
 
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",

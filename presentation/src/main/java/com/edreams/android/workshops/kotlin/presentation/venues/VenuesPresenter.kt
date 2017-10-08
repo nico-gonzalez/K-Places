@@ -5,7 +5,8 @@ import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteracto
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 
-data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float)
+data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float,
+    val formattedAddress: String?, val formattedPhone: String?)
 
 class VenuesPresenter(private val venuesView: VenuesView,
     private val getVenuesInteractor: GetVenuesInteractor,

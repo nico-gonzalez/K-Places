@@ -3,7 +3,7 @@ package com.edreams.android.workshops.kotlin.common.extensions
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.RequestOptions.circleCropTransform
 
 fun View.visible() {
   this.visibility = View.VISIBLE
@@ -18,5 +18,7 @@ fun ImageView.load(url: String) {
 }
 
 fun ImageView.loadCircle(url: String) {
-  Glide.with(context).load(url).apply(RequestOptions.circleCropTransform()).into(this)
+  Glide.with(context).load(url)
+      .apply(circleCropTransform())
+      .into(this)
 }
