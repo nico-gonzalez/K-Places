@@ -1,5 +1,6 @@
 package com.edreams.android.workshops.kotlin.injection
 
+import android.support.test.espresso.idling.CountingIdlingResource
 import com.edreams.android.workshops.kotlin.data.mapper.VenueMapper
 import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesNetController
 import com.edreams.android.workshops.kotlin.data.net.service.RestService
@@ -15,20 +16,26 @@ import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
 
 object DependencyInjector {
 
-  private val restService: RestService? = null
+  private var restService: RestService = RestService()
+  private var idlingResource: CountingIdlingResource = CountingIdlingResource(
+      "CustomIdlingResource")
 
-  fun provideRestService(): RestService = restService ?: RestService()
+  fun provideRestService(): RestService = restService
+
+  fun provideFoursquareService() = provideRestService().service
 
   fun provideExploreVenueController(): ExploreVenuesController = ExploreVenuesNetController(
-      provideRestService(), provideVenuesModelMapper())
+      provideFoursquareService(), provideVenuesModelMapper(), provideIdlingResource())
 
-  private fun provideVenuesModelMapper(): Mapper<VenueResponse, VenueModel> = VenueMapper()
+  fun provideVenuesModelMapper(): Mapper<VenueResponse, VenueModel> = VenueMapper()
 
-  private fun provideVenuesUiModelMapper(): Mapper<VenueModel, VenueUiModel> = VenuesUiModelMapper()
+  fun provideVenuesUiModelMapper(): Mapper<VenueModel, VenueUiModel> = VenuesUiModelMapper()
 
   fun provideGetVenuesInteractor(): GetVenuesInteractor =
       GetVenuesInteractor(provideExploreVenueController())
 
   fun provideVenuesPresenter(venuesView: VenuesView): VenuesPresenter =
       VenuesPresenter(venuesView, provideGetVenuesInteractor(), provideVenuesUiModelMapper())
+
+  fun provideIdlingResource(): CountingIdlingResource = idlingResource
 }

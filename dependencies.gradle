@@ -26,17 +26,21 @@ ext {
   robolectricVersion = '3.4.2'
   hamcrestVersion = '1.3'
   mockitoVersion = '2.10.0'
+  mockitoKotlinVersion = '1.5.0'
 
-  dataDependencies = [kotlin      : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                      gson        : "com.google.code.gson:gson:${gsonVersion}",
-                      retrofit    : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                      retrofitGson: "com.squareup.retrofit2:converter-gson:${retrofitVersion}"]
+  dataDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                      gson                  : "com.google.code.gson:gson:${gsonVersion}",
+                      espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                      retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                      retrofitGson          : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"]
 
-  dataTestDependencies = [junit       : "junit:junit:${jUnitVersion}",
-                          kotlinJUnit : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
-                          mockito     : "org.mockito:mockito-core:${mockitoVersion}",
-                          espressoCore: "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-                          robolectric : "org.robolectric:robolectric:${robolectricVersion}"]
+  dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
+                          kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+                          mockito               : "org.mockito:mockito-core:${mockitoVersion}",
+                          espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+                          espressoContrib       : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
+                          espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                          robolectric           : "org.robolectric:robolectric:${robolectricVersion}"]
 
   domainDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
 
@@ -46,9 +50,10 @@ ext {
 
   presentationDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
 
-  presentationTestDependencies = [junit      : "junit:junit:${jUnitVersion}",
-                                  kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
-                                  mockito    : "org.mockito:mockito-core:${mockitoVersion}"]
+  presentationTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
+                                  kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+                                  mockito      : "org.mockito:mockito-core:${mockitoVersion}",
+                                  mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 
   appDependencies = [kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
                      supportV7        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
@@ -59,7 +64,7 @@ ext {
 
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
-                         mockito        : "org.mockito:mockito-core:${mockitoVersion}",
+                         mockitoAndroid : "org.mockito:mockito-android:${mockitoVersion}",
                          espressoCore   : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
                          espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
                          androidRunner  : "com.android.support.test:runner:${runnerVersion}",
@@ -67,5 +72,6 @@ ext {
                          hamcrest       : "org.hamcrest:hamcrest-all:${hamcrestVersion}",
                          robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
 
-  injectionDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
+  injectionDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",]
 }
