@@ -8,7 +8,7 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float,
     val formattedAddress: String?, val formattedPhone: String?)
 
-class VenuesPresenter(private val venuesView: VenuesView,
+open class VenuesPresenter(private val venuesView: VenuesView,
     private val getVenuesInteractor: GetVenuesInteractor,
     private val mapper: Mapper<VenueModel, VenueUiModel>) {
 
@@ -26,6 +26,7 @@ class VenuesPresenter(private val venuesView: VenuesView,
   }
 
   fun onSearch(queryString: String) {
+    venuesView.showLoading()
     getVenuesInteractor.getVenues(queryString, object : GetVenuesInteractorListener {
       override fun onGetVenuesSuccessful(venues: List<VenueModel>) {
         onGetVenuesResult(venues)

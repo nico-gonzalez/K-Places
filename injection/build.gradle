@@ -31,4 +31,5 @@ dependencies {
 
   def injectionDependencies = rootProject.ext.injectionDependencies
   implementation injectionDependencies.kotlin
+  implementation injectionDependencies.espressoIdlingResource
 }

@@ -11,6 +11,7 @@ dependencies {
   testImplementation presentationTestDependencies.junit
   testImplementation presentationTestDependencies.kotlinJUnit
   testImplementation presentationTestDependencies.mockito
+  testImplementation presentationTestDependencies.mockitoKotlin
 }
 
 sourceCompatibility = "1.7"
