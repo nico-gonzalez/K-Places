@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.edreams.android.workshops.kotlin.data"/>
+<manifest package="com.edreams.android.workshops.kotlin.data"/>
