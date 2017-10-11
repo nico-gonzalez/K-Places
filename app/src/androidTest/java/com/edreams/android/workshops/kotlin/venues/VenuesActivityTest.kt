@@ -21,12 +21,5 @@ class VenuesActivityTest : BaseTest() {
   @Test
   fun onLoadViewShowsVenues() {
     venuesRobot.checkVenuesAreDisplayed()
-        .checkProgressBarIsNotDisplayed()
-  }
-
-  @Test
-  fun onVenueClickShowsDetails() {
-    venuesRobot.clickOnVenue()
-        .checkSelectedVenueDetailsIsDisplayed()
   }
 }
