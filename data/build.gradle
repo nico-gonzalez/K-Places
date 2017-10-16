@@ -1,4 +1,11 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+def FS_CLIENT_ID = '"' + fs_client_id + '"' ?:
+    "You must define Foursquare places api client id in gradle.properties"
+def FS_CLIENT_SECRET = '"' + fs_client_secret + '"' ?:
+    "You must define Foursquare places api client secret in gradle.properties"
 
 android {
   compileSdkVersion 26
@@ -29,13 +36,24 @@ dependencies {
   implementation project(":domain")
 
   implementation dataDependencies.kotlin
+  implementation dataDependencies.gson
+  implementation dataDependencies.retrofit
+  implementation dataDependencies.retrofitGson
+  implementation dataDependencies.espressoIdlingResource
 
   testImplementation dataTestDependencies.junit
   testImplementation dataTestDependencies.kotlinJUnit
   testImplementation dataTestDependencies.mockito
   testImplementation dataTestDependencies.robolectric
 
+  androidTestImplementation dataTestDependencies.espressoIdlingResource
   androidTestImplementation(dataTestDependencies.espressoCore, {
     exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  androidTestImplementation(dataTestDependencies.espressoContrib, {
+    exclude group: 'com.android.support', module: 'appcompat'
+    exclude group: 'com.android.support', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
   })
 }

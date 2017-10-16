@@ -7,7 +7,7 @@ buildscript {
     jcenter()
   }
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.0.0-beta7'
+    classpath 'com.android.tools.build:gradle:3.0.0-rc1'
     classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
 
     // NOTE: Do not place your application dependencies here; they belong
@@ -19,6 +19,24 @@ allprojects {
   repositories {
     google()
     jcenter()
+  }
+}
+
+subprojects {
+  afterEvaluate { project ->
+    if (project.hasProperty('android')) {
+      def FS_CLIENT_ID = '"' + fs_client_id + '"' ?:
+          "You must define Foursquare places api client id in gradle.properties"
+      def FS_CLIENT_SECRET = '"' + fs_client_secret + '"' ?:
+          "You must define Foursquare places api client secret in gradle.properties"
+
+      android {
+        buildTypes.each { type ->
+          type.buildConfigField 'String', 'FS_CLIENT_ID', FS_CLIENT_ID
+          type.buildConfigField 'String', 'FS_CLIENT_SECRET', FS_CLIENT_SECRET
+        }
+      }
+    }
   }
 }
 

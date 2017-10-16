@@ -18,12 +18,33 @@ android {
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "com.edreams.android.workshops.kotlin.test.KotlinWorkshopJUnitRunner"
   }
   buildTypes {
     release {
       minifyEnabled true
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  lintOptions {
+    abortOnError false
+  }
+
+  sourceSets {
+    String sharedTestDir = 'src/sharedTest/java'
+    String sharedTestResDir = 'src/sharedTest/resources'
+    test {
+      resources {
+        srcDir sharedTestResDir
+      }
+      java.srcDir sharedTestDir
+    }
+    androidTest {
+      resources {
+        srcDir sharedTestResDir
+      }
+      java.srcDir sharedTestDir
     }
   }
 }
@@ -32,14 +53,28 @@ dependencies {
   def appDependencies = rootProject.ext.appDependencies
   def appTestDependencies = rootProject.ext.appTestDependencies
 
+  implementation project(":injection")
   implementation project(":presentation")
 
   implementation appDependencies.supportV7
+  implementation appDependencies.supportDesign
+  implementation appDependencies.recyclerView
+  implementation appDependencies.cardView
   implementation appDependencies.supportConstraint
   implementation appDependencies.kotlin
+  implementation appDependencies.glide
 
-  testImplementation appTestDependencies.junit
+  androidTestImplementation appTestDependencies.junit
+  androidTestImplementation appTestDependencies.androidRunner
+  androidTestImplementation appTestDependencies.androidRules
+  androidTestImplementation appTestDependencies.mockitoAndroid
   androidTestImplementation(appTestDependencies.espressoCore, {
     exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  androidTestImplementation(appTestDependencies.espressoContrib, {
+    exclude group: 'com.android.support', module: 'appcompat'
+    exclude group: 'com.android.support', module: 'support-v4'
+    exclude group: 'com.android.support', module: 'support-annotations'
+    exclude module: 'recyclerview-v7'
   })
 }
