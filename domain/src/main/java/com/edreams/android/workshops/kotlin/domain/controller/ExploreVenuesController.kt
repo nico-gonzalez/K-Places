@@ -4,11 +4,5 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 
 interface ExploreVenuesController {
 
-  fun exploreVenues(near: String, listener: ExploreVenueControllerListener)
-
-  interface ExploreVenueControllerListener {
-
-    fun onGetVenuesSuccessful(venues: List<VenueModel>)
-    fun onGetVenuesError(error: Throwable)
-  }
+  fun exploreVenues(near: String, success: (List<VenueModel>) -> Unit, error: (Throwable) -> Unit)
 }

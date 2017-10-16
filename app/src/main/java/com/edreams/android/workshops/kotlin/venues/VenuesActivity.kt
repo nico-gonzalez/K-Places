@@ -38,7 +38,7 @@ class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
 
     setupVenuesList()
 
-    presenter.loadVenues()
+    presenter.loadVenues("Barcelona")
   }
 
   private fun setupVenuesList() = with(venuesList) {
@@ -72,7 +72,7 @@ class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
     val bottomSheet = BottomSheetDialog(this)
     val bottomSheetView = layoutInflater.inflate(R.layout.venue_details, null)
     bottomSheet.setContentView(bottomSheetView)
-    bottomSheetView.apply {
+    with(bottomSheetView) {
       venueTitle.text = venue.title
       venueImage.load(venue.photoUrl)
       venue.formattedAddress?.let {

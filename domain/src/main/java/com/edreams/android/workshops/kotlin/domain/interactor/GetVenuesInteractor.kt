@@ -5,22 +5,11 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 
 class GetVenuesInteractor(private val controller: ExploreVenuesController) {
 
-  fun getVenues(near: String, listener: GetVenuesInteractorListener) {
+  fun getVenues(near: String, success: (List<VenueModel>) -> Unit, error: (Throwable) -> Unit) {
     controller.exploreVenues(near,
-        object : ExploreVenuesController.ExploreVenueControllerListener {
-          override fun onGetVenuesSuccessful(venues: List<VenueModel>) {
-            listener.onGetVenuesSuccessful(venues)
-          }
-
-          override fun onGetVenuesError(error: Throwable) {
-            listener.onGetVenuesError(error)
-          }
-        })
-  }
-
-  interface GetVenuesInteractorListener {
-    fun onGetVenuesSuccessful(venues: List<VenueModel>)
-
-    fun onGetVenuesError(error: Throwable)
+      success
+    ,
+      error
+    )
   }
 }
