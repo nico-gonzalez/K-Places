@@ -3,7 +3,6 @@ package com.edreams.android.workshop.kotlin.presentation.places
 import com.edreams.android.workshop.kotlin.presentation.utils.capture
 import com.edreams.android.workshop.kotlin.presentation.utils.eq
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
-import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor.GetVenuesInteractorListener
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
@@ -38,8 +37,8 @@ class VenuesPresenterTest {
   @Mock private lateinit var getVenuesInteractor: GetVenuesInteractor
   @Mock private lateinit var mapper: Mapper<VenueModel, VenueUiModel>
 
-  @Captor
-  private lateinit var getVenuesInteractorListenerCaptor: ArgumentCaptor<GetVenuesInteractorListener>
+  @Captor private lateinit var successCaptor: ArgumentCaptor<(List<VenueModel>) -> Unit>
+  @Captor private lateinit var errorCaptor: ArgumentCaptor<(Throwable) -> Unit>
 
   @Before
   fun setup() {
@@ -49,13 +48,13 @@ class VenuesPresenterTest {
   @Test
   fun `When places are loaded then interactor is called and then the view displays the result`() {
     val near = "Barcelona"
-    presenter.loadVenues()
+    presenter.loadVenues(near)
 
     verify(placesView).showLoading()
-    verify(getVenuesInteractor).getVenues(eq(near), capture(getVenuesInteractorListenerCaptor))
+    verify(getVenuesInteractor).getVenues(eq(near), capture(successCaptor), capture(errorCaptor))
 
     val venues = buildMockVenues()
-    getVenuesInteractorListenerCaptor.value.onGetVenuesSuccessful(venues)
+    successCaptor.value.invoke(venues)
 
     verify(placesView).hideLoading()
     verify(placesView).showVenues(anyList())
@@ -67,10 +66,10 @@ class VenuesPresenterTest {
     presenter.onSearch(near)
 
     verify(placesView).showLoading()
-    verify(getVenuesInteractor).getVenues(eq(near), capture(getVenuesInteractorListenerCaptor))
+    verify(getVenuesInteractor).getVenues(eq(near), capture(successCaptor), capture(errorCaptor))
 
     val venues = buildMockVenues()
-    getVenuesInteractorListenerCaptor.value.onGetVenuesSuccessful(venues)
+    successCaptor.value.invoke(venues)
 
     verify(placesView).hideLoading()
     verify(placesView).showVenues(anyList())
