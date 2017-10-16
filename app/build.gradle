@@ -59,6 +59,7 @@ dependencies {
   implementation appDependencies.supportV7
   implementation appDependencies.supportDesign
   implementation appDependencies.recyclerView
+  implementation appDependencies.cardView
   implementation appDependencies.supportConstraint
   implementation appDependencies.kotlin
   implementation appDependencies.glide

@@ -1,7 +1,9 @@
 package com.edreams.android.workshops.kotlin.common.extensions
 
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.circleCropTransform
 
@@ -22,3 +24,7 @@ fun ImageView.loadCircle(url: String) {
       .apply(circleCropTransform())
       .into(this)
 }
+
+val TextView.textString get() = this.text.toString()
+
+val View.inflater: LayoutInflater get() = LayoutInflater.from(context)

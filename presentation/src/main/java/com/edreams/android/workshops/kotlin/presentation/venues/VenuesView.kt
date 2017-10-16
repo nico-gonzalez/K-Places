@@ -11,4 +11,6 @@ interface VenuesView {
   fun hideLoading()
 
   fun showVenueDetails(venue: VenueUiModel)
+
+  fun showEmptySearchError()
 }

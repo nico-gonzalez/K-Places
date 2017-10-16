@@ -10,22 +10,24 @@ import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
+import com.edreams.android.workshops.kotlin.common.extensions.textString
 import com.edreams.android.workshops.kotlin.injection.DependencyInjector.provideVenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
-import com.edreams.android.workshops.kotlin.venues.VenuesAdapter.VenueItemClickListener
+import kotlinx.android.synthetic.main.activity_venues.near
 import kotlinx.android.synthetic.main.activity_venues.progressBar
+import kotlinx.android.synthetic.main.activity_venues.search
 import kotlinx.android.synthetic.main.activity_venues.venuesList
 import kotlinx.android.synthetic.main.venue_details.view.venueAddress
 import kotlinx.android.synthetic.main.venue_details.view.venueImage
 import kotlinx.android.synthetic.main.venue_details.view.venuePhone
 import kotlinx.android.synthetic.main.venue_details.view.venueTitle
 
-class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
+class VenuesActivity : AppCompatActivity(), VenuesView {
 
   private val adapter: VenuesAdapter by lazy {
-    VenuesAdapter(this)
+    VenuesAdapter({ _, venue -> presenter.onVenueSelected(venue) })
   }
 
   private val presenter: VenuesPresenter by lazy {
@@ -37,8 +39,15 @@ class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
     setContentView(layout.activity_venues)
 
     setupVenuesList()
+    setupSearch()
 
     presenter.loadVenues("Barcelona")
+  }
+
+  private fun setupSearch() {
+    search.setOnClickListener {
+      presenter.onSearch(near.textString)
+    }
   }
 
   private fun setupVenuesList() = with(venuesList) {
@@ -64,8 +73,8 @@ class VenuesActivity : AppCompatActivity(), VenuesView, VenueItemClickListener {
     progressBar.hide()
   }
 
-  override fun onVenueClicked(position: Int, venue: VenueUiModel) {
-    presenter.onVenueSelected(venue)
+  override fun showEmptySearchError() {
+    near.error = getString(R.string.empty_search_message)
   }
 
   override fun showVenueDetails(venue: VenueUiModel) {

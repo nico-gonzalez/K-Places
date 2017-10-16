@@ -18,6 +18,10 @@ class VenuesPresenter(private val venuesView: VenuesView,
   }
 
   fun onSearch(queryString: String) {
+    if (queryString.isEmpty()) {
+      return venuesView.showEmptySearchError()
+    }
+
     venuesView.showLoading()
     getVenuesInteractor.getVenues(queryString, { onGetVenuesResult(it) },
         { venuesView.showError(it.localizedMessage) })
