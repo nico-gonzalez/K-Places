@@ -27,11 +27,9 @@ class VenuesPresenter(private val venuesView: VenuesView,
         { venuesView.showError(it.localizedMessage) })
   }
 
-  private fun onGetVenuesResult(venues: List<VenueModel>) {
-    venuesView.apply {
-      hideLoading()
-      showVenues(mapper.map(venues))
-    }
+  private fun onGetVenuesResult(venues: List<VenueModel>) = with(venuesView) {
+    hideLoading()
+    showVenues(mapper.map(venues))
   }
 
   fun onVenueSelected(venue: VenueUiModel) {

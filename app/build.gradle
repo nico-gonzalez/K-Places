@@ -18,7 +18,7 @@ android {
     versionCode versionMajor * 10000 + versionMinor * 1000 + versionPatch * 100 + versionBuild
     versionName "${versionMajor}.${versionMinor}.${versionPatch}"
 
-    testInstrumentationRunner "com.edreams.android.workshops.kotlin.test.KotlinWorkshopJUnitRunner"
+    testInstrumentationRunner "com.edreams.android.workshops.kotlin.util.KotlinWorkshopJUnitRunner"
   }
   buildTypes {
     release {

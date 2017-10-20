@@ -1,8 +1,8 @@
 package com.edreams.android.workshops.kotlin.domain.venues
 
-import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import com.edreams.android.workshops.kotlin.domain.util.capture
 import com.edreams.android.workshops.kotlin.domain.util.eq
 import org.junit.Before
@@ -27,7 +27,7 @@ class GetVenuesInteractorTest {
   private val PHONE = "+(34) 689 16 77 55"
   private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
-  @Mock lateinit var exploreVenuesController: ExploreVenuesController
+  @Mock lateinit var venuesRepository: VenuesRepository
   @Mock lateinit var success: (List<VenueModel>) -> Unit
   @Mock lateinit var error: (Throwable) -> Unit
 
@@ -38,7 +38,7 @@ class GetVenuesInteractorTest {
 
   @Before
   fun setup() {
-    interactor = GetVenuesInteractor(exploreVenuesController)
+    interactor = GetVenuesInteractor(venuesRepository)
   }
 
   @Test
@@ -46,7 +46,7 @@ class GetVenuesInteractorTest {
     val near = "Barcelona"
     interactor.getVenues(near, success, error)
 
-    verify(exploreVenuesController).exploreVenues(eq(near), capture(successCaptor),
+    verify(venuesRepository).getVenues(eq(near), capture(successCaptor),
         capture(errorCaptor))
 
     val venues = buildMockVenues()
@@ -60,7 +60,7 @@ class GetVenuesInteractorTest {
     val near = "Barcelona"
     interactor.getVenues(near, success, error)
 
-    verify(exploreVenuesController).exploreVenues(
+    verify(venuesRepository).getVenues(
         eq(near),
         capture(successCaptor), capture(errorCaptor))
 

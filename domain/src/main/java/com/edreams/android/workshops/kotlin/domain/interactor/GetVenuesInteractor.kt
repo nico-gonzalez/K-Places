@@ -1,15 +1,12 @@
 package com.edreams.android.workshops.kotlin.domain.interactor
 
-import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 
-class GetVenuesInteractor(private val controller: ExploreVenuesController) {
+class GetVenuesInteractor(private val repository: VenuesRepository) {
 
-  fun getVenues(near: String, success: (List<VenueModel>) -> Unit, error: (Throwable) -> Unit) {
-    controller.exploreVenues(near,
-      success
-    ,
-      error
-    )
+  fun getVenues(near: String, success: (List<VenueModel>) -> Unit,
+      error: (Throwable) -> Unit) = with(repository) {
+    getVenues(near, success, error)
   }
 }
