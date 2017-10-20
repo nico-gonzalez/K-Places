@@ -37,6 +37,7 @@ ext {
   dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
                           kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
                           mockito               : "org.mockito:mockito-core:${mockitoVersion}",
+                          mockitoKotlin         : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
                           espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
                           espressoContrib       : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
@@ -44,9 +45,10 @@ ext {
 
   domainDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
 
-  domainTestDependencies = [junit      : "junit:junit:${jUnitVersion}",
-                            kotlinJUnit: "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
-                            mockito    : "org.mockito:mockito-core:${mockitoVersion}"]
+  domainTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
+                            kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+                            mockito      : "org.mockito:mockito-core:${mockitoVersion}",
+                            mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 
   presentationDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
 
@@ -66,6 +68,7 @@ ext {
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
                          mockitoAndroid : "org.mockito:mockito-android:${mockitoVersion}",
+                         mockitoKotlin  : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
                          espressoCore   : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
                          espressoContrib: "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
                          androidRunner  : "com.android.support.test:runner:${runnerVersion}",

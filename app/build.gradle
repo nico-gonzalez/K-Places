@@ -64,6 +64,7 @@ dependencies {
   implementation appDependencies.kotlin
   implementation appDependencies.glide
 
+  testImplementation appTestDependencies.junit
   androidTestImplementation appTestDependencies.junit
   androidTestImplementation appTestDependencies.androidRunner
   androidTestImplementation appTestDependencies.androidRules

@@ -1,12 +1,10 @@
-package com.edreams.android.workshops.kotlin.domain.util
+package com.edreams.android.workshops.kotlin.domain.venues
 
 import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController
-import com.edreams.android.workshops.kotlin.domain.controller.ExploreVenuesController.ExploreVenueControllerListener
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
-import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor.GetVenuesInteractorListener
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
-import com.edreams.android.workshops.kotlin.domain.venues.capture
-import com.edreams.android.workshops.kotlin.domain.venues.eq
+import com.edreams.android.workshops.kotlin.domain.util.capture
+import com.edreams.android.workshops.kotlin.domain.util.eq
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -30,10 +28,11 @@ class GetVenuesInteractorTest {
   private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
   @Mock lateinit var exploreVenuesController: ExploreVenuesController
+  @Mock lateinit var success: (List<VenueModel>) -> Unit
+  @Mock lateinit var error: (Throwable) -> Unit
 
-  @Mock lateinit var getVenuesInteractorListener: GetVenuesInteractorListener
-
-  @Captor lateinit var exploreVenuesControllerListener: ArgumentCaptor<ExploreVenueControllerListener>
+  @Captor private lateinit var successCaptor: ArgumentCaptor<(List<VenueModel>) -> Unit>
+  @Captor private lateinit var errorCaptor: ArgumentCaptor<(Throwable) -> Unit>
 
   private lateinit var interactor: GetVenuesInteractor
 
@@ -45,29 +44,30 @@ class GetVenuesInteractorTest {
   @Test
   fun `When getVenues success calls explore venues net controller and forwards result to listener`() {
     val near = "Barcelona"
-    interactor.getVenues(near, getVenuesInteractorListener)
+    interactor.getVenues(near, success, error)
 
-    verify(exploreVenuesController).exploreVenues(eq(near),
-        capture(exploreVenuesControllerListener))
+    verify(exploreVenuesController).exploreVenues(eq(near), capture(successCaptor),
+        capture(errorCaptor))
 
     val venues = buildMockVenues()
-    exploreVenuesControllerListener.value.onGetVenuesSuccessful(venues)
+    successCaptor.value.invoke(venues)
 
-    verify(getVenuesInteractorListener).onGetVenuesSuccessful(venues)
+    verify(success).invoke(venues)
   }
 
   @Test
   fun `When getVenues error calls explore venues net controller and forwards result to listener`() {
     val near = "Barcelona"
-    interactor.getVenues(near, getVenuesInteractorListener)
+    interactor.getVenues(near, success, error)
 
-    verify(exploreVenuesController).exploreVenues(eq(near),
-        capture(exploreVenuesControllerListener))
+    verify(exploreVenuesController).exploreVenues(
+        eq(near),
+        capture(successCaptor), capture(errorCaptor))
 
     val error = Throwable("Error")
-    exploreVenuesControllerListener.value.onGetVenuesError(error)
+    errorCaptor.value.invoke(error)
 
-    verify(getVenuesInteractorListener).onGetVenuesError(error)
+    verify(this.error).invoke(error)
   }
 
   private fun buildMockVenues(): List<VenueModel> = listOf(

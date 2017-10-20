@@ -22,16 +22,16 @@ object DependencyInjector {
 
   fun provideRestService(): RestService = restService
 
-  fun provideFoursquareService() = provideRestService().service
+  private fun provideFoursquareService() = provideRestService().service
 
-  fun provideExploreVenueController(): ExploreVenuesController = ExploreVenuesNetController(
+  private fun provideExploreVenueController(): ExploreVenuesController = ExploreVenuesNetController(
       provideFoursquareService(), provideVenuesModelMapper(), provideIdlingResource())
 
-  fun provideVenuesModelMapper(): Mapper<VenueResponse, VenueModel> = VenueMapper()
+  private fun provideVenuesModelMapper(): Mapper<VenueResponse, VenueModel> = VenueMapper()
 
-  fun provideVenuesUiModelMapper(): Mapper<VenueModel, VenueUiModel> = VenuesUiModelMapper()
+  private fun provideVenuesUiModelMapper(): Mapper<VenueModel, VenueUiModel> = VenuesUiModelMapper()
 
-  fun provideGetVenuesInteractor(): GetVenuesInteractor =
+  private fun provideGetVenuesInteractor(): GetVenuesInteractor =
       GetVenuesInteractor(provideExploreVenueController())
 
   fun provideVenuesPresenter(venuesView: VenuesView): VenuesPresenter =

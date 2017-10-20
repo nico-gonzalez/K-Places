@@ -1,8 +1,9 @@
-package com.edreams.android.workshops.kotlin.test
+package com.edreams.android.workshops.kotlin.util
 
 import android.app.Application
 import android.content.Context
 import android.support.test.runner.AndroidJUnitRunner
+import com.edreams.android.workshops.kotlin.test.TestApplication
 
 class KotlinWorkshopJUnitRunner : AndroidJUnitRunner() {
 

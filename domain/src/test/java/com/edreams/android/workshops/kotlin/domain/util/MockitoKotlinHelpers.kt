@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.domain.venues
+package com.edreams.android.workshops.kotlin.domain.util
 
 import org.mockito.ArgumentCaptor
 import org.mockito.Mockito
