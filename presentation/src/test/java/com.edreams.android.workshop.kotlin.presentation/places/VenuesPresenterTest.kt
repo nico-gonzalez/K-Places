@@ -1,13 +1,14 @@
 package com.edreams.android.workshop.kotlin.presentation.places
 
-import com.edreams.android.workshop.kotlin.presentation.utils.capture
-import com.edreams.android.workshop.kotlin.presentation.utils.eq
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
+import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.inOrder
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,8 +57,10 @@ class VenuesPresenterTest {
     val venues = buildMockVenues()
     successCaptor.value.invoke(venues)
 
-    verify(placesView).hideLoading()
-    verify(placesView).showVenues(anyList())
+    inOrder(placesView) {
+      verify(placesView).hideLoading()
+      verify(placesView).showVenues(anyList())
+    }
   }
 
   @Test
@@ -71,8 +74,10 @@ class VenuesPresenterTest {
     val venues = buildMockVenues()
     successCaptor.value.invoke(venues)
 
-    verify(placesView).hideLoading()
-    verify(placesView).showVenues(anyList())
+    inOrder(placesView) {
+      verify(placesView).hideLoading()
+      verify(placesView).showVenues(anyList())
+    }
   }
 
   private fun buildMockVenues() = listOf(

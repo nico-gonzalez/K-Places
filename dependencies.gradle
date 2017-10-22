@@ -77,5 +77,5 @@ ext {
                          robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
 
   injectionDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",]
+                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"]
 }
