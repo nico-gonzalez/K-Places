@@ -18,8 +18,8 @@ internal class VenuesAdapter(private val venueItemClickListener: (Int, VenueUiMo
     val oldVenues = ArrayList(this)
     clear()
     addAll(venues)
-    val diffUtil = DiffUtil.calculateDiff(VenuesDiffCallback(oldVenues, this))
-    diffUtil.dispatchUpdatesTo(this@VenuesAdapter)
+    DiffUtil.calculateDiff(VenuesDiffCallback(oldVenues, this))
+        .dispatchUpdatesTo(this@VenuesAdapter)
   }
 
   override fun getItemCount(): Int = venues.size

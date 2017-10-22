@@ -3,8 +3,8 @@ package com.edreams.android.workshops.kotlin.domain.venues
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
-import com.edreams.android.workshops.kotlin.domain.util.capture
-import com.edreams.android.workshops.kotlin.domain.util.eq
+import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.eq
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
