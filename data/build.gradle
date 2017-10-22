@@ -2,11 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def FS_CLIENT_ID = '"' + fs_client_id + '"' ?:
-    "You must define Foursquare places api client id in gradle.properties"
-def FS_CLIENT_SECRET = '"' + fs_client_secret + '"' ?:
-    "You must define Foursquare places api client secret in gradle.properties"
-
 android {
   compileSdkVersion 26
   buildToolsVersion "26.0.2"
