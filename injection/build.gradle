@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion rootProject.androidCompileSdkVersion
@@ -21,15 +22,24 @@ android {
       minifyEnabled false
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
+    debug {
+      buildConfigField "String", "BASE_URL", "\"https://api.foursquare.com\""
+    }
   }
 }
 
 dependencies {
-  implementation project(":presentation")
-  implementation project(":domain")
-  implementation project(":data")
+  api project(":presentation")
+  api project(":domain")
+  api project(":data")
 
   def injectionDependencies = rootProject.ext.injectionDependencies
   implementation injectionDependencies.kotlin
   implementation injectionDependencies.espressoIdlingResource
+  implementation injectionDependencies.dagger
+  kapt injectionDependencies.daggerCompiler
+  implementation injectionDependencies.daggerAndroid
+  implementation injectionDependencies.daggerAndroidSupport
+  kapt injectionDependencies.daggerAndroidCompiler
+  implementation injectionDependencies.javaxInject
 }

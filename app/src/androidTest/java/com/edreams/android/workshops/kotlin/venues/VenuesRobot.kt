@@ -11,10 +11,11 @@ import android.support.test.rule.ActivityTestRule
 import android.support.v7.widget.RecyclerView.ViewHolder
 import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.R.id
+import com.edreams.android.workshops.kotlin.util.TestRobot
 import org.hamcrest.CoreMatchers.not
 
 
-class VenuesRobot {
+class VenuesRobot : TestRobot() {
 
   private var activityRule: ActivityTestRule<VenuesActivity> = ActivityTestRule(
       VenuesActivity::class.java, true, false)
@@ -22,7 +23,6 @@ class VenuesRobot {
   fun init() = apply {
     activityRule.launchActivity(null)
   }
-
 
   fun checkVenuesAreDisplayed() = apply {
     onView(withId(id.venuesList))

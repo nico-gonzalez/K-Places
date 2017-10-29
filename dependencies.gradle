@@ -18,6 +18,8 @@ ext {
   retrofitVersion = '2.3.0'
   gsonVersion = '2.8.2'
   glideVersion = '4.2.0'
+  daggerVersion = '2.12'
+  javaxInjectVersion = '1'
 
   //Testing
   jUnitVersion = '4.12'
@@ -32,7 +34,8 @@ ext {
                       gson                  : "com.google.code.gson:gson:${gsonVersion}",
                       espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
                       retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                      retrofitGson          : "com.squareup.retrofit2:converter-gson:${retrofitVersion}"]
+                      retrofitGson          : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+                      javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}"]
 
   dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
                           kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -43,27 +46,35 @@ ext {
                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
                           robolectric           : "org.robolectric:robolectric:${robolectricVersion}"]
 
-  domainDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
+  domainDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                        javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
 
   domainTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
                             kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
                             mockito      : "org.mockito:mockito-core:${mockitoVersion}",
                             mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 
-  presentationDependencies = [kotlin: "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}"]
+  presentationDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                              javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
 
   presentationTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
                                   kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
                                   mockito      : "org.mockito:mockito-core:${mockitoVersion}",
                                   mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 
-  appDependencies = [kotlin           : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                     supportV7        : "com.android.support:appcompat-v7:${supportLibraryVersion}",
-                     recyclerView     : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
-                     cardView         : "com.android.support:cardview-v7:${supportLibraryVersion}",
-                     supportDesign    : "com.android.support:design:${supportLibraryVersion}",
-                     supportConstraint: "com.android.support.constraint:constraint-layout:${constraintVersion}",
-                     glide            : "com.github.bumptech.glide:glide:${glideVersion}"]
+  appDependencies = [kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                     supportV7            : "com.android.support:appcompat-v7:${supportLibraryVersion}",
+                     recyclerView         : "com.android.support:recyclerview-v7:${supportLibraryVersion}",
+                     cardView             : "com.android.support:cardview-v7:${supportLibraryVersion}",
+                     supportDesign        : "com.android.support:design:${supportLibraryVersion}",
+                     supportConstraint    : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+                     glide                : "com.github.bumptech.glide:glide:${glideVersion}",
+                     dagger               : "com.google.dagger:dagger:${daggerVersion}",
+                     daggerCompiler       : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                     daggerAndroid        : "com.google.dagger:dagger-android:${daggerVersion}",
+                     daggerAndroidSupport : "com.google.dagger:dagger-android-support:${daggerVersion}",
+                     daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:${daggerVersion}",
+                     javaxInject          : "javax.inject:javax.inject:${javaxInjectVersion}"]
 
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -74,8 +85,15 @@ ext {
                          androidRunner  : "com.android.support.test:runner:${runnerVersion}",
                          androidRules   : "com.android.support.test:rules:${runnerVersion}",
                          hamcrest       : "org.hamcrest:hamcrest-all:${hamcrestVersion}",
-                         robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
+                         robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
+                         daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}"]
 
   injectionDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"]
+                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                           dagger                : "com.google.dagger:dagger:${daggerVersion}",
+                           daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                           daggerAndroid         : "com.google.dagger:dagger-android:${daggerVersion}",
+                           daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${daggerVersion}",
+                           daggerAndroidCompiler : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+                           javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}"]
 }
