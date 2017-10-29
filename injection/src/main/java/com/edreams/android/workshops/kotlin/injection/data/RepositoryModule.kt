@@ -4,12 +4,11 @@ import com.edreams.android.workshops.kotlin.data.mapper.VenueMapper
 import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesNetController
 import com.edreams.android.workshops.kotlin.data.repository.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
-import com.edreams.android.workshops.kotlin.injection.espresso.IdlingResourceModule
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(NetworkModule::class, IdlingResourceModule::class))
+@Module(includes = arrayOf(NetworkModule::class))
 class RepositoryModule {
 
   @Singleton
