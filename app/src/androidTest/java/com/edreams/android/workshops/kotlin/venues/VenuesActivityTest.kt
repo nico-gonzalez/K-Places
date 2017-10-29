@@ -2,14 +2,13 @@ package com.edreams.android.workshops.kotlin.venues
 
 import android.support.test.filters.LargeTest
 import android.support.test.runner.AndroidJUnit4
-import com.edreams.android.workshops.kotlin.util.BaseTest
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
-class VenuesActivityTest : BaseTest() {
+class VenuesActivityTest {
 
   private lateinit var venuesRobot: VenuesRobot
 

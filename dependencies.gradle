@@ -85,7 +85,8 @@ ext {
                          androidRunner  : "com.android.support.test:runner:${runnerVersion}",
                          androidRules   : "com.android.support.test:rules:${runnerVersion}",
                          hamcrest       : "org.hamcrest:hamcrest-all:${hamcrestVersion}",
-                         robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
+                         robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
+                         daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}"]
 
   injectionDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
                            espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
