@@ -1,11 +1,11 @@
 package com.edreams.android.workshops.kotlin.injection
 
 import android.support.test.espresso.idling.CountingIdlingResource
-import com.edreams.android.workshops.kotlin.data.repository.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.data.mapper.VenueMapper
 import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesNetController
 import com.edreams.android.workshops.kotlin.data.net.service.RestService
+import com.edreams.android.workshops.kotlin.data.repository.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.data.response.VenueResponse
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
@@ -15,7 +15,9 @@ import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMap
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
+import kotlin.DeprecationLevel.ERROR
 
+@Deprecated(message = "Use dagger instead", level = ERROR)
 object DependencyInjector {
 
   private var restService: RestService = RestService()
