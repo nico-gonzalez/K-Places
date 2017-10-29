@@ -1,6 +1,7 @@
 package com.edreams.android.workshops.kotlin.injection.data
 
 import com.edreams.android.workshops.kotlin.data.net.service.FoursquareService
+import com.edreams.android.workshops.kotlin.injection.BuildConfig
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -13,7 +14,7 @@ class NetworkModule {
 
   @Provides
   @Named("baseUrl")
-  fun provideBaseUrl(): String = "https://api.foursquare.com"
+  fun provideBaseUrl(): String = BuildConfig.BASE_URL
 
   @Singleton
   @Provides
