@@ -88,5 +88,11 @@ ext {
                          robolectric    : "org.robolectric:robolectric:${robolectricVersion}"]
 
   injectionDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}"]
+                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                           dagger                : "com.google.dagger:dagger:${daggerVersion}",
+                           daggerCompiler        : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                           daggerAndroid         : "com.google.dagger:dagger-android:${daggerVersion}",
+                           daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${daggerVersion}",
+                           daggerAndroidCompiler : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+                           javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}"]
 }

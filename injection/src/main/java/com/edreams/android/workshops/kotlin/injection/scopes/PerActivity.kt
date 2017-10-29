@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.common.injection.scopes
+package com.edreams.android.workshops.kotlin.injection.scopes
 
 import javax.inject.Scope
 import kotlin.annotation.AnnotationRetention.RUNTIME

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
   compileSdkVersion rootProject.androidCompileSdkVersion
@@ -32,4 +33,10 @@ dependencies {
   def injectionDependencies = rootProject.ext.injectionDependencies
   implementation injectionDependencies.kotlin
   implementation injectionDependencies.espressoIdlingResource
+  implementation injectionDependencies.dagger
+  kapt injectionDependencies.daggerCompiler
+  implementation injectionDependencies.daggerAndroid
+  implementation injectionDependencies.daggerAndroidSupport
+  kapt injectionDependencies.daggerAndroidCompiler
+  implementation injectionDependencies.javaxInject
 }

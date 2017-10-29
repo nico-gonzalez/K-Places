@@ -9,7 +9,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class ExploreVenuesNetController @Inject constructor(private val service: FoursquareService,
     private val idlingResource: CountingIdlingResource) : ExploreVenuesController {
 
