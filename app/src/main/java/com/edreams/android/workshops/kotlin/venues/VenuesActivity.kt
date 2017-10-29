@@ -11,10 +11,10 @@ import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
 import com.edreams.android.workshops.kotlin.common.extensions.textString
-import com.edreams.android.workshops.kotlin.injection.DependencyInjector.provideVenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_venues.near
 import kotlinx.android.synthetic.main.activity_venues.progressBar
 import kotlinx.android.synthetic.main.activity_venues.search
@@ -23,18 +23,21 @@ import kotlinx.android.synthetic.main.venue_details.view.venueAddress
 import kotlinx.android.synthetic.main.venue_details.view.venueImage
 import kotlinx.android.synthetic.main.venue_details.view.venuePhone
 import kotlinx.android.synthetic.main.venue_details.view.venueTitle
+import javax.inject.Inject
 
 class VenuesActivity : AppCompatActivity(), VenuesView {
 
-  private val adapter: VenuesAdapter by lazy {
-    VenuesAdapter({ _, venue -> presenter.onVenueSelected(venue) })
-  }
+  @Inject lateinit var presenter: VenuesPresenter
 
-  private val presenter: VenuesPresenter by lazy {
-    provideVenuesPresenter(this)
+  lateinit var adapter: VenuesAdapter
+
+  @Inject internal fun setAdapter(venuesAdapter: VenuesAdapter) {
+    adapter = venuesAdapter
+    adapter.setVenueItemClickListener { _, venue -> presenter.onVenueSelected(venue) }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    AndroidInjection.inject(this)
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_venues)
 

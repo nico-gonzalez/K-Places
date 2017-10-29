@@ -8,11 +8,13 @@ import com.edreams.android.workshops.kotlin.common.extensions.inflater
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder.PlaceViewHolder
 import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
+import javax.inject.Inject
 
-internal class VenuesAdapter(private val venueItemClickListener: (Int, VenueUiModel) -> Unit)
+class VenuesAdapter @Inject constructor()
   : RecyclerView.Adapter<ViewHolder<VenueUiModel>>() {
 
   private val venues: MutableList<VenueUiModel> = mutableListOf()
+  private lateinit var venueItemClickListener: (Int, VenueUiModel) -> Unit
 
   internal fun setPlaces(venues: List<VenueUiModel>) = with(this.venues) {
     val oldVenues = ArrayList(this)
@@ -20,6 +22,10 @@ internal class VenuesAdapter(private val venueItemClickListener: (Int, VenueUiMo
     addAll(venues)
     DiffUtil.calculateDiff(VenuesDiffCallback(oldVenues, this))
         .dispatchUpdatesTo(this@VenuesAdapter)
+  }
+
+  internal fun setVenueItemClickListener(venueItemClickListener: (Int, VenueUiModel) -> Unit) {
+    this.venueItemClickListener = venueItemClickListener
   }
 
   override fun getItemCount(): Int = venues.size

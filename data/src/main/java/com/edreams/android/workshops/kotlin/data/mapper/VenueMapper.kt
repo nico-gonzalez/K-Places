@@ -4,8 +4,9 @@ import com.edreams.android.workshops.kotlin.data.response.PhotoResponse
 import com.edreams.android.workshops.kotlin.data.response.VenueResponse
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import javax.inject.Inject
 
-class VenueMapper : Mapper<VenueResponse, VenueModel> {
+class VenueMapper @Inject constructor() : Mapper<VenueResponse, VenueModel> {
 
   override fun map(from: VenueResponse): VenueModel = with(from) {
     return VenueModel(id,

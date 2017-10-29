@@ -3,11 +3,12 @@ package com.edreams.android.workshops.kotlin.presentation.venues
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import javax.inject.Inject
 
 data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float,
     val formattedAddress: String?, val formattedPhone: String?)
 
-class VenuesPresenter(private val venuesView: VenuesView,
+class VenuesPresenter @Inject constructor(private val venuesView: VenuesView,
     private val getVenuesInteractor: GetVenuesInteractor,
     private val mapper: Mapper<VenueModel, VenueUiModel>) {
 
