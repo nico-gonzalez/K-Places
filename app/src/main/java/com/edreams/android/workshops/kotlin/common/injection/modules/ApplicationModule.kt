@@ -1,7 +1,7 @@
 package com.edreams.android.workshops.kotlin.common.injection.modules
 
+import android.app.Application
 import android.content.Context
-import com.edreams.android.workshops.kotlin.common.KotlinWorkshopApplication
 import com.edreams.android.workshops.kotlin.common.resources.AndroidResourceProvider
 import com.edreams.android.workshops.kotlin.injection.common.MapperModule
 import com.edreams.android.workshops.kotlin.injection.presentation.ViewModelModule
@@ -15,7 +15,7 @@ class ApplicationModule {
 
   @PerApplication
   @Provides
-  fun provideContext(application: KotlinWorkshopApplication): Context = application
+  fun provideContext(application: Application): Context = application
 
   @PerApplication
   @Provides

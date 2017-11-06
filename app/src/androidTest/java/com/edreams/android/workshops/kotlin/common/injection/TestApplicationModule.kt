@@ -1,5 +1,6 @@
 package com.edreams.android.workshops.kotlin.common.injection
 
+import android.app.Application
 import android.content.Context
 import com.edreams.android.workshops.kotlin.common.resources.AndroidResourceProvider
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
@@ -11,6 +12,10 @@ import dagger.Provides
 
 @Module
 class TestApplicationModule {
+
+  @PerApplication
+  @Provides
+  fun provideContext(application: Application): Context = application
 
   @Provides
   fun provideVenuesRepository(): VenuesRepository = VenuesMockRepository()
