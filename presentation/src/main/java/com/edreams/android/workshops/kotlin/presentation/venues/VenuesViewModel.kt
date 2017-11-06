@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class VenuesViewModel @Inject constructor(
     private val getVenuesInteractor: GetVenuesInteractor,
-    private val mapper: VenuesUiModelMapper) : ViewModel() {
+    private val mapper: Mapper<VenueModel, VenueUiModel>,
     private val resourceProvider: ResourceProvider) : ViewModel() {
 
   private val venues: MutableLiveData<VenuesUiModel> = MutableLiveData()
