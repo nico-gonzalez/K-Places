@@ -72,8 +72,8 @@ class VenuesActivity : AppCompatActivity() {
       }
     })
     viewModel.getEmptySearchError().observe(this, Observer {
-      it.let {
-        showEmptySearchError()
+      it?.let {
+        showEmptySearchError(it)
       }
     })
     viewModel.getVenueSelected().observe(this, Observer {
@@ -112,8 +112,8 @@ class VenuesActivity : AppCompatActivity() {
     progressBar.hide()
   }
 
-  private fun showEmptySearchError() {
-    near.error = getString(R.string.empty_search_message)
+  private fun showEmptySearchError(message: String) {
+    near.error = message
   }
 
   private fun showVenueDetails(venue: VenueUiModel) {

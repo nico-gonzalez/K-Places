@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvider
 import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMapper
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenuesUiModel
 import com.edreams.android.workshops.kotlin.presentation.viewmodel.SingleLiveEvent
@@ -17,9 +18,10 @@ data class VenueUiModel(val title: String, val photoUrl: String, val rating: Flo
 class VenuesViewModel @Inject constructor(
     private val getVenuesInteractor: GetVenuesInteractor,
     private val mapper: VenuesUiModelMapper) : ViewModel() {
+    private val resourceProvider: ResourceProvider) : ViewModel() {
 
   private val venues: MutableLiveData<VenuesUiModel> = MutableLiveData()
-  private val emptySearchError: MutableLiveData<Boolean> = MutableLiveData()
+  private val emptySearchError: MutableLiveData<String> = MutableLiveData()
   private val selectedVenue: MutableLiveData<VenueUiModel> = SingleLiveEvent()
 
   fun loadVenues(near: String): LiveData<VenuesUiModel> = venues.apply {
@@ -30,7 +32,7 @@ class VenuesViewModel @Inject constructor(
 
   fun onSearch(queryString: String) = venues.apply {
     if (queryString.isEmpty()) {
-      emptySearchError.value = true
+      emptySearchError.value = resourceProvider.emptyVenueSearchErrorMessage()
       return@apply
     }
 
