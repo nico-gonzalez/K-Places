@@ -1,6 +1,7 @@
 package com.edreams.android.workshops.kotlin.presentation.venues.model
 
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
+data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float,
+    val formattedAddress: String?, val formattedPhone: String?)
 
 class VenuesUiModel private constructor(val venues: List<VenueUiModel> = emptyList(),
     val progress: Boolean = false,

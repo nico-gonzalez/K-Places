@@ -14,8 +14,8 @@ import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
 import com.edreams.android.workshops.kotlin.common.extensions.textString
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_venues.near
 import kotlinx.android.synthetic.main.activity_venues.progressBar

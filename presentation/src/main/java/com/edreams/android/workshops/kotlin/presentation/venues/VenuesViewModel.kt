@@ -7,13 +7,10 @@ import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteracto
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvider
-import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMapper
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenuesUiModel
 import com.edreams.android.workshops.kotlin.presentation.viewmodel.SingleLiveEvent
 import javax.inject.Inject
-
-data class VenueUiModel(val title: String, val photoUrl: String, val rating: Float,
-    val formattedAddress: String?, val formattedPhone: String?)
 
 class VenuesViewModel @Inject constructor(
     private val getVenuesInteractor: GetVenuesInteractor,
