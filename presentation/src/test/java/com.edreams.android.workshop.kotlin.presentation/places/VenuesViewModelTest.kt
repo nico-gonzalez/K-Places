@@ -2,11 +2,11 @@ package com.edreams.android.workshop.kotlin.presentation.places
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
-import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMapper
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
+import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvider
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import com.nhaarman.mockito_kotlin.KArgumentCaptor
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.eq
@@ -18,6 +18,7 @@ import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito.times
 import org.mockito.Mockito.verify
 
 class VenuesViewModelTest {
@@ -40,17 +41,46 @@ class VenuesViewModelTest {
 
   private val getVenuesInteractor: GetVenuesInteractor = mock()
   private val mapper: VenuesUiModelMapper = mock()
+  private val resourceProvider: ResourceProvider = mock()
 
   private val successCaptor: KArgumentCaptor<(List<VenueModel>) -> Unit> = argumentCaptor()
   private val errorCaptor: KArgumentCaptor<(Throwable) -> Unit> = argumentCaptor()
 
   @Before
   fun setup() {
-    viewModel = VenuesViewModel(getVenuesInteractor, mapper)
+    viewModel = VenuesViewModel(getVenuesInteractor, mapper, resourceProvider)
   }
 
   @Test
-  fun whenPlacesAreLoadedThenInteractorIsCalledAndThenTheViewDisplaysTheResult() {
+  fun whenPlaceSearchQueryIsEmptyThenAnErrorIsEmitted() {
+    whenever(resourceProvider.emptyVenueSearchErrorMessage())
+        .thenReturn("Empty search error message")
+
+    val emptySearchErrorLiveData = viewModel.getEmptySearchError()
+    viewModel.onSearch("")
+
+    verify(resourceProvider, times(1)).emptyVenueSearchErrorMessage()
+    assertThat(emptySearchErrorLiveData.value, `is`(equalTo("Empty search error message")))
+  }
+
+  @Test
+  fun whenPlacesFailToLoadThenTheInteractorIsCalledAndAnErrorIsEmitted() {
+    val near = "Barcelona"
+    val venuesLiveData = viewModel.loadVenues(near)
+
+    assertThat(venuesLiveData.value?.progress, `is`(true))
+
+    argumentCaptor<(Throwable) -> Unit>().apply {
+      verify(getVenuesInteractor).getVenues(eq(near), successCaptor.capture(), capture())
+      lastValue(Throwable("An error occurred"))
+    }
+
+    assertThat(venuesLiveData.value?.progress, `is`(false))
+    assertThat(venuesLiveData.value?.error, `is`(equalTo("An error occurred")))
+  }
+
+  @Test
+  fun whenPlacesAreLoadedThenInteractorIsCalledAndThenAListOfVenuesIsEmitted() {
     val near = "Barcelona"
     val venuesLiveData = viewModel.loadVenues(near)
 
@@ -70,7 +100,7 @@ class VenuesViewModelTest {
   }
 
   @Test
-  fun whenPlaceSearchIsTriggeredThenTheViewDisplaysTheResults() {
+  fun whenPlaceSearchIsTriggeredThenAListOfVenuesIsEmitted() {
     val near = "Barcelona"
     val venuesLiveData = viewModel.onSearch(near)
 
