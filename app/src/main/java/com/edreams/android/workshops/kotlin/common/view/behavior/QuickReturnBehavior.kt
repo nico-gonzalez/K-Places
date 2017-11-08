@@ -90,7 +90,6 @@ class QuickReturnBehavior(context: Context, attrs: AttributeSet) : Behavior<View
       }
 
       override fun onAnimationCancel(animator: Animator) {
-        // Canceling a show should hide the view
         isShowing = false
         if (!isHiding) {
           hide(view)
