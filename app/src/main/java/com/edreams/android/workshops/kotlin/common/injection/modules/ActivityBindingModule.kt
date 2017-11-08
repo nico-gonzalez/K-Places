@@ -9,6 +9,6 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityBindingModule {
 
   @PerActivity
-  @ContributesAndroidInjector(modules = arrayOf(VenuesActivityModule::class))
+  @ContributesAndroidInjector
   abstract fun bindVenuesActivity(): VenuesActivity
 }
