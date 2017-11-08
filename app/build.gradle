@@ -70,6 +70,7 @@ dependencies {
   implementation appDependencies.daggerAndroidSupport
   kapt appDependencies.daggerAndroidCompiler
   implementation appDependencies.javaxInject
+  implementation appDependencies.archExtensions
 
   testImplementation appTestDependencies.junit
   androidTestImplementation appTestDependencies.junit

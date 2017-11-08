@@ -20,6 +20,7 @@ ext {
   glideVersion = '4.2.0'
   daggerVersion = '2.12'
   javaxInjectVersion = '1'
+  archExtensionsVersion = '1.0.0'
 
   //Testing
   jUnitVersion = '4.12'
@@ -54,13 +55,15 @@ ext {
                             mockito      : "org.mockito:mockito-core:${mockitoVersion}",
                             mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
 
-  presentationDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                              javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
+  presentationDependencies = [kotlin        : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                              javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
+                              archExtensions: "android.arch.lifecycle:extensions:${archExtensionsVersion}"]
 
-  presentationTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
-                                  kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
-                                  mockito      : "org.mockito:mockito-core:${mockitoVersion}",
-                                  mockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"]
+  presentationTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
+                                  kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
+                                  mockito        : "org.mockito:mockito-core:${mockitoVersion}",
+                                  mockitoKotlin  : "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}",
+                                  archCoreTesting: "android.arch.core:core-testing:${archExtensionsVersion}"]
 
   appDependencies = [kotlin               : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
                      supportV7            : "com.android.support:appcompat-v7:${supportLibraryVersion}",
@@ -74,7 +77,8 @@ ext {
                      daggerAndroid        : "com.google.dagger:dagger-android:${daggerVersion}",
                      daggerAndroidSupport : "com.google.dagger:dagger-android-support:${daggerVersion}",
                      daggerAndroidCompiler: "com.google.dagger:dagger-android-processor:${daggerVersion}",
-                     javaxInject          : "javax.inject:javax.inject:${javaxInjectVersion}"]
+                     javaxInject          : "javax.inject:javax.inject:${javaxInjectVersion}",
+                     archExtensions       : "android.arch.lifecycle:extensions:${archExtensionsVersion}"]
 
   appTestDependencies = [junit          : "junit:junit:${jUnitVersion}",
                          kotlinJUnit    : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -95,5 +99,6 @@ ext {
                            daggerAndroid         : "com.google.dagger:dagger-android:${daggerVersion}",
                            daggerAndroidSupport  : "com.google.dagger:dagger-android-support:${daggerVersion}",
                            daggerAndroidCompiler : "com.google.dagger:dagger-android-processor:${daggerVersion}",
-                           javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}"]
+                           javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}",
+                           archExtensions        : "android.arch.lifecycle:extensions:${archExtensionsVersion}"]
 }
