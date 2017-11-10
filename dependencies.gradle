@@ -21,6 +21,7 @@ ext {
   daggerVersion = '2.12'
   javaxInjectVersion = '1'
   archExtensionsVersion = '1.0.0'
+  kotlinCoroutinesVersion = '0.19.3'
 
   //Testing
   jUnitVersion = '4.12'
@@ -31,12 +32,14 @@ ext {
   mockitoVersion = '2.10.0'
   mockitoKotlinVersion = '1.5.0'
 
-  dataDependencies = [kotlin                : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                      gson                  : "com.google.code.gson:gson:${gsonVersion}",
-                      espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
-                      retrofit              : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                      retrofitGson          : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-                      javaxInject           : "javax.inject:javax.inject:${javaxInjectVersion}"]
+  dataDependencies = [kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                      gson                   : "com.google.code.gson:gson:${gsonVersion}",
+                      espressoIdlingResource : "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                      retrofit               : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+                      retrofitGson           : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+                      javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",
+                      kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
+                      kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}"]
 
   dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
                           kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -47,8 +50,10 @@ ext {
                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
                           robolectric           : "org.robolectric:robolectric:${robolectricVersion}"]
 
-  domainDependencies = [kotlin     : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                        javaxInject: "javax.inject:javax.inject:${javaxInjectVersion}"]
+  domainDependencies = [kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                        javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",
+                        kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
+                        kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}"]
 
   domainTestDependencies = [junit        : "junit:junit:${jUnitVersion}",
                             kotlinJUnit  : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",

@@ -34,6 +34,8 @@ dependencies {
   api dataDependencies.retrofitGson
   api dataDependencies.espressoIdlingResource
   implementation dataDependencies.javaxInject
+  implementation dataDependencies.kotlinCoroutines
+  implementation dataDependencies.kotlinCoroutinesAndroid
 
   testImplementation dataTestDependencies.junit
   testImplementation dataTestDependencies.kotlinJUnit
