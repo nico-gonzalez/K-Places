@@ -6,7 +6,8 @@ import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import javax.inject.Inject
 
 class GetVenuesInteractor @Inject constructor(
-    private val repository: VenuesRepository) : BaseInteractor {
+    private val repository: VenuesRepository,
+    executor: Executor) : BaseInteractor(executor) {
 
   fun getVenues(near: String, success: Callback<List<VenueModel>>,
       error: Callback<Throwable>) {

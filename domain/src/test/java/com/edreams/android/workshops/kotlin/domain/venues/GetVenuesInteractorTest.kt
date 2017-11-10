@@ -7,6 +7,7 @@ import com.nhaarman.mockito_kotlin.KArgumentCaptor
 import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
+import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.verify
@@ -34,7 +35,7 @@ class GetVenuesInteractorTest {
 
   @Before
   fun setup() {
-    interactor = GetVenuesInteractor(venuesRepository)
+    interactor = GetVenuesInteractor(venuesRepository, BlockingExecutor())
   }
 
   @Test
@@ -42,8 +43,9 @@ class GetVenuesInteractorTest {
     val near = "Barcelona"
     interactor.getVenues(near, success, error)
 
-    verify(venuesRepository).getVenues(eq(near), successCaptor.capture(),
-        errorCaptor.capture())
+    runBlocking {
+      verify(venuesRepository).getVenues(eq(near))
+    }
 
     val venues = buildMockVenues()
     successCaptor.lastValue(venues)
@@ -56,10 +58,9 @@ class GetVenuesInteractorTest {
     val near = "Barcelona"
     interactor.getVenues(near, success, error)
 
-    verify(venuesRepository).getVenues(
-        eq(near),
-        successCaptor.capture(),
-        errorCaptor.capture())
+    runBlocking {
+      verify(venuesRepository).getVenues(eq(near))
+    }
 
     val error = Throwable("Error")
     errorCaptor.lastValue(error)
