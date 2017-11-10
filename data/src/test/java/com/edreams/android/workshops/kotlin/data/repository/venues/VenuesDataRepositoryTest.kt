@@ -6,29 +6,25 @@ import com.edreams.android.workshops.kotlin.data.response.VenueResponse
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
+import com.nhaarman.mockito_kotlin.KArgumentCaptor
 import com.nhaarman.mockito_kotlin.argThat
-import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.inOrder
+import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
-import org.mockito.Mock
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class VenuesDataRepositoryTest {
 
-  @Mock private lateinit var mapper: Mapper<VenueResponse, VenueModel>
-  @Mock private lateinit var exploreVenuesController: ExploreVenuesController
-  @Mock private lateinit var response: (List<VenueModel>) -> Unit
-  @Mock private lateinit var error: (Throwable) -> Unit
+  private val mapper: Mapper<VenueResponse, VenueModel> = mock()
+  private val exploreVenuesController: ExploreVenuesController = mock()
+  private val response: (List<VenueModel>) -> Unit = mock()
+  private val error: (Throwable) -> Unit = mock()
 
-  @Captor private lateinit var successCaptor: ArgumentCaptor<(List<VenueResponse>) -> Unit>
-  @Captor private lateinit var errorCaptor: ArgumentCaptor<(Throwable) -> Unit>
+  private val successCaptor: KArgumentCaptor<(List<VenueResponse>) -> Unit> = argumentCaptor()
+  private val errorCaptor: KArgumentCaptor<(Throwable) -> Unit> = argumentCaptor()
 
   private lateinit var repository: VenuesRepository
 
@@ -44,9 +40,9 @@ class VenuesDataRepositoryTest {
     val near = "Barcelona"
     repository.getVenues(near, response, error)
 
-    verify(exploreVenuesController).exploreVenues(eq(near), capture(successCaptor),
-        capture(errorCaptor))
-    successCaptor.value.invoke(venues)
+    verify(exploreVenuesController).exploreVenues(eq(near), successCaptor.capture(),
+        errorCaptor.capture())
+    successCaptor.lastValue(venues)
     inOrder(mapper, response) {
       verify(mapper).map(eq(venues))
       verify(response).invoke(eq(mapper.map(venues)))
@@ -58,9 +54,9 @@ class VenuesDataRepositoryTest {
     val near = "Barcelona"
     repository.getVenues(near, response, error)
 
-    verify(exploreVenuesController).exploreVenues(eq(near), capture(successCaptor),
-        capture(errorCaptor))
-    errorCaptor.value.invoke(Throwable("error"))
+    verify(exploreVenuesController).exploreVenues(eq(near), successCaptor.capture(),
+        errorCaptor.capture())
+    errorCaptor.lastValue(Throwable("error"))
     verify(error).invoke(argThat { localizedMessage == "error" })
   }
 

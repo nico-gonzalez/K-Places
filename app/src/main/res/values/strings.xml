@@ -1,5 +1,4 @@
 <resources>
-  <string name="app_name">Kotlin-Workshop</string>
-  <string name="hello_kotlin">Hello Kotlin!</string>
+  <string name="app_name">KPlaces</string>
   <string name="empty_search_message">Place cannot be empty</string>
 </resources>

@@ -3,18 +3,14 @@ package com.edreams.android.workshops.kotlin.domain.venues
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
-import com.nhaarman.mockito_kotlin.capture
+import com.nhaarman.mockito_kotlin.KArgumentCaptor
+import com.nhaarman.mockito_kotlin.argumentCaptor
 import com.nhaarman.mockito_kotlin.eq
+import com.nhaarman.mockito_kotlin.mock
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.mockito.ArgumentCaptor
-import org.mockito.Captor
-import org.mockito.Mock
 import org.mockito.Mockito.verify
-import org.mockito.junit.MockitoJUnitRunner
 
-@RunWith(MockitoJUnitRunner::class)
 class GetVenuesInteractorTest {
 
   private val ID = "1"
@@ -27,12 +23,12 @@ class GetVenuesInteractorTest {
   private val PHONE = "+(34) 689 16 77 55"
   private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
-  @Mock lateinit var venuesRepository: VenuesRepository
-  @Mock lateinit var success: (List<VenueModel>) -> Unit
-  @Mock lateinit var error: (Throwable) -> Unit
+  private val venuesRepository: VenuesRepository = mock()
+  private val success: (List<VenueModel>) -> Unit = mock()
+  private val error: (Throwable) -> Unit = mock()
 
-  @Captor private lateinit var successCaptor: ArgumentCaptor<(List<VenueModel>) -> Unit>
-  @Captor private lateinit var errorCaptor: ArgumentCaptor<(Throwable) -> Unit>
+  private val successCaptor: KArgumentCaptor<(List<VenueModel>) -> Unit> = argumentCaptor()
+  private val errorCaptor: KArgumentCaptor<(Throwable) -> Unit> = argumentCaptor()
 
   private lateinit var interactor: GetVenuesInteractor
 
@@ -46,11 +42,11 @@ class GetVenuesInteractorTest {
     val near = "Barcelona"
     interactor.getVenues(near, success, error)
 
-    verify(venuesRepository).getVenues(eq(near), capture(successCaptor),
-        capture(errorCaptor))
+    verify(venuesRepository).getVenues(eq(near), successCaptor.capture(),
+        errorCaptor.capture())
 
     val venues = buildMockVenues()
-    successCaptor.value.invoke(venues)
+    successCaptor.lastValue(venues)
 
     verify(success).invoke(venues)
   }
@@ -62,10 +58,11 @@ class GetVenuesInteractorTest {
 
     verify(venuesRepository).getVenues(
         eq(near),
-        capture(successCaptor), capture(errorCaptor))
+        successCaptor.capture(),
+        errorCaptor.capture())
 
     val error = Throwable("Error")
-    errorCaptor.value.invoke(error)
+    errorCaptor.lastValue(error)
 
     verify(this.error).invoke(error)
   }

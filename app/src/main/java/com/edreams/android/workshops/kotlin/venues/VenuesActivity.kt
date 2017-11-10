@@ -1,5 +1,8 @@
 package com.edreams.android.workshops.kotlin.venues
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialog
 import android.support.design.widget.Snackbar
@@ -11,9 +14,8 @@ import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
 import com.edreams.android.workshops.kotlin.common.extensions.textString
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
-import com.edreams.android.workshops.kotlin.presentation.venues.VenuesPresenter
-import com.edreams.android.workshops.kotlin.presentation.venues.VenuesView
+import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_venues.near
 import kotlinx.android.synthetic.main.activity_venues.progressBar
@@ -25,31 +27,65 @@ import kotlinx.android.synthetic.main.venue_details.view.venuePhone
 import kotlinx.android.synthetic.main.venue_details.view.venueTitle
 import javax.inject.Inject
 
-class VenuesActivity : AppCompatActivity(), VenuesView {
+class VenuesActivity : AppCompatActivity() {
 
-  @Inject lateinit var presenter: VenuesPresenter
+  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+  private lateinit var viewModel: VenuesViewModel
 
   lateinit var adapter: VenuesAdapter
 
   @Inject internal fun setAdapter(venuesAdapter: VenuesAdapter) {
     adapter = venuesAdapter
-    adapter.setVenueItemClickListener { _, venue -> presenter.onVenueSelected(venue) }
+    adapter.setVenueItemClickListener { _, venue ->
+      viewModel.onVenueSelected(venue)
+    }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
+    viewModel = ViewModelProviders.of(this, viewModelFactory)
+        .get(VenuesViewModel::class.java)
     super.onCreate(savedInstanceState)
     setContentView(layout.activity_venues)
 
     setupVenuesList()
     setupSearch()
 
-    presenter.loadVenues("Barcelona")
+    subscribe()
+  }
+
+
+  private fun subscribe() {
+    viewModel.loadVenues("Barcelona").observe(this, Observer {
+      it?.let {
+        if (it.progress) {
+          showLoading()
+        } else {
+          hideLoading()
+          if (it.error.isEmpty()) {
+            showVenues(it.venues)
+          } else {
+            showError(it.error)
+          }
+        }
+      }
+    })
+    viewModel.getEmptySearchError().observe(this, Observer {
+      it?.let {
+        showEmptySearchError(it)
+      }
+    })
+    viewModel.getVenueSelected().observe(this, Observer {
+      it?.let {
+        showVenueDetails(it)
+      }
+    })
   }
 
   private fun setupSearch() {
     search.setOnClickListener {
-      presenter.onSearch(near.textString)
+      viewModel.onSearch(near.textString)
     }
   }
 
@@ -59,28 +95,28 @@ class VenuesActivity : AppCompatActivity(), VenuesView {
     setHasFixedSize(true)
   }
 
-  override fun showVenues(venues: List<VenueUiModel>) {
+  private fun showVenues(venues: List<VenueUiModel>) {
     adapter.setPlaces(venues)
   }
 
-  override fun showError(error: String) {
+  private fun showError(error: String) {
     Snackbar.make(venuesList, error, LENGTH_SHORT)
         .show()
   }
 
-  override fun showLoading() {
+  private fun showLoading() {
     progressBar.show()
   }
 
-  override fun hideLoading() {
+  private fun hideLoading() {
     progressBar.hide()
   }
 
-  override fun showEmptySearchError() {
-    near.error = getString(R.string.empty_search_message)
+  private fun showEmptySearchError(message: String) {
+    near.error = message
   }
 
-  override fun showVenueDetails(venue: VenueUiModel) {
+  private fun showVenueDetails(venue: VenueUiModel) {
     val bottomSheet = BottomSheetDialog(this)
     val bottomSheetView = layoutInflater.inflate(R.layout.venue_details, null)
     bottomSheet.setContentView(bottomSheetView)

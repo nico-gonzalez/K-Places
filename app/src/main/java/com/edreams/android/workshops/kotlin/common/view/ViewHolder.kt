@@ -3,7 +3,7 @@ package com.edreams.android.workshops.kotlin.common.view
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.edreams.android.workshops.kotlin.common.extensions.loadCircle
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import kotlinx.android.synthetic.main.venue_item.view.placeImage
 import kotlinx.android.synthetic.main.venue_item.view.placeTitle
 import kotlinx.android.synthetic.main.venue_item.view.ratingBar

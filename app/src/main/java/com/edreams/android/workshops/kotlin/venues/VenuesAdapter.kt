@@ -7,7 +7,7 @@ import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.inflater
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder.PlaceViewHolder
-import com.edreams.android.workshops.kotlin.presentation.venues.VenueUiModel
+import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import javax.inject.Inject
 
 class VenuesAdapter @Inject constructor()

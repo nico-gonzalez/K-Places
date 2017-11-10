@@ -11,7 +11,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class ExploreVenuesNetController @Inject constructor(private val service: FoursquareService) : ExploreVenuesController {
+class ExploreVenuesNetController @Inject constructor(
+    private val service: FoursquareService) : ExploreVenuesController {
 
   override fun exploreVenues(near: String, success: (List<VenueResponse>) -> Unit,
       error: (Throwable) -> Unit) {
