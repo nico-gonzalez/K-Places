@@ -1,12 +1,13 @@
 package com.edreams.android.workshops.kotlin.test.injection.mock.repository
 
+import com.edreams.android.workshops.kotlin.domain.interactor.Callback
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 
 class VenuesMockRepository : VenuesRepository {
 
-  override fun getVenues(near: String, response: (List<VenueModel>) -> Unit,
-      error: (Throwable) -> Unit) {
+  override fun getVenues(near: String, response: Callback<List<VenueModel>>,
+      error: Callback<Throwable>) {
     response(listOf(
         VenueModel("1",
             "Sagrada familia",

@@ -3,6 +3,7 @@ package com.edreams.android.workshops.kotlin.data.repository.venues
 import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.data.repository.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.data.response.VenueResponse
+import com.edreams.android.workshops.kotlin.domain.common.Callback
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
@@ -20,11 +21,11 @@ class VenuesDataRepositoryTest {
 
   private val mapper: Mapper<VenueResponse, VenueModel> = mock()
   private val exploreVenuesController: ExploreVenuesController = mock()
-  private val response: (List<VenueModel>) -> Unit = mock()
-  private val error: (Throwable) -> Unit = mock()
+  private val response: Callback<List<VenueModel>> = mock()
+  private val error: Callback<Throwable> = mock()
 
-  private val successCaptor: KArgumentCaptor<(List<VenueResponse>) -> Unit> = argumentCaptor()
-  private val errorCaptor: KArgumentCaptor<(Throwable) -> Unit> = argumentCaptor()
+  private val successCaptor: KArgumentCaptor<Callback<List<VenueResponse>>> = argumentCaptor()
+  private val errorCaptor: KArgumentCaptor<Callback<Throwable>> = argumentCaptor()
 
   private lateinit var repository: VenuesRepository
 
