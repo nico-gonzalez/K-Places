@@ -6,14 +6,12 @@ import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.Unconfined
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 
 class BlockingExecutor : Executor {
   override fun <T> ui(uiFun: Suspendable<T>) = launch(Unconfined) {
     uiFun()
   }
 
-  override fun <T> bg(asyncFun: Suspendable<T>): Deferred<T> = runBlocking {
-    async { asyncFun() }
-  }
+  override fun <T> bg(asyncFun: Suspendable<T>): Deferred<T> =
+      async(Unconfined) { asyncFun() }
 }

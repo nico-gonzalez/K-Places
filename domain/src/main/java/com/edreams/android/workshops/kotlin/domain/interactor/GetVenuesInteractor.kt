@@ -1,7 +1,7 @@
 package com.edreams.android.workshops.kotlin.domain.interactor
 
 import com.edreams.android.workshops.kotlin.domain.common.Callback
-import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import com.edreams.android.workshops.kotlin.domain.common.GetVenuesResult
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import javax.inject.Inject
 
@@ -9,17 +9,17 @@ class GetVenuesInteractor @Inject constructor(
     private val repository: VenuesRepository,
     executor: Executor) : BaseInteractor(executor) {
 
-  fun getVenues(near: String, success: Callback<List<VenueModel>>,
-      error: Callback<Throwable>) {
+  fun getVenues(near: String, success: Callback<GetVenuesResult>,
+      error: Callback<GetVenuesResult>) {
     postExecute {
       val getVenues = asyncExecute {
         repository.getVenues(near)
       }
-      val result = getVenues.await()
-      if (result.isEmpty()) {
-        error(Throwable("No venues where found"))
+      val venues = getVenues.await()
+      if (venues.isEmpty()) {
+        error(GetVenuesResult(venues, Throwable("No venues where found")))
       } else {
-        success(result)
+        success(GetVenuesResult(venues))
       }
     }
   }

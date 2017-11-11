@@ -2,6 +2,7 @@ package com.edreams.android.workshop.kotlin.presentation.places
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.edreams.android.workshops.kotlin.domain.common.Callback
+import com.edreams.android.workshops.kotlin.domain.common.GetVenuesResult
 import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMapper
@@ -44,8 +45,8 @@ class VenuesViewModelTest {
   private val mapper: VenuesUiModelMapper = mock()
   private val resourceProvider: ResourceProvider = mock()
 
-  private val successCaptor: KArgumentCaptor<Callback<List<VenueModel>>> = argumentCaptor()
-  private val errorCaptor: KArgumentCaptor<Callback<Throwable>> = argumentCaptor()
+  private val successCaptor: KArgumentCaptor<Callback<GetVenuesResult>> = argumentCaptor()
+  private val errorCaptor: KArgumentCaptor<Callback<GetVenuesResult>> = argumentCaptor()
 
   @Before
   fun setup() {
@@ -71,9 +72,9 @@ class VenuesViewModelTest {
 
     assertThat(venuesLiveData.value?.progress, `is`(true))
 
-    argumentCaptor<Callback<Throwable>>().apply {
+    argumentCaptor<Callback<GetVenuesResult>>().apply {
       verify(getVenuesInteractor).getVenues(eq(near), successCaptor.capture(), capture())
-      lastValue(Throwable("An error occurred"))
+      lastValue(GetVenuesResult(listOf(), Throwable("An error occurred")))
     }
 
     assertThat(venuesLiveData.value?.progress, `is`(false))
@@ -91,9 +92,9 @@ class VenuesViewModelTest {
     val venuesUi = buildMockVenuesUi()
     whenever(mapper.map(venues)).thenReturn(venuesUi)
 
-    argumentCaptor<Callback<List<VenueModel>>>().apply {
+    argumentCaptor<Callback<GetVenuesResult>>().apply {
       verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
-      lastValue(venues)
+      lastValue(GetVenuesResult(venues))
     }
 
     assertThat(venuesLiveData.value?.progress, `is`(false))
@@ -111,9 +112,9 @@ class VenuesViewModelTest {
     val venuesUi = buildMockVenuesUi()
     whenever(mapper.map(venues)).thenReturn(venuesUi)
 
-    argumentCaptor<Callback<List<VenueModel>>>().apply {
+    argumentCaptor<Callback<GetVenuesResult>>().apply {
       verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
-      lastValue(venues)
+      lastValue(GetVenuesResult(venues))
     }
 
     assertThat(venuesLiveData.value?.progress, `is`(false))
