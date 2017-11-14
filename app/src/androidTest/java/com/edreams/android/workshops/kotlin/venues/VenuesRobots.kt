@@ -12,8 +12,17 @@ import android.support.v7.widget.RecyclerView.ViewHolder
 import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.R.id
 import com.edreams.android.workshops.kotlin.util.TestRobot
-import org.hamcrest.CoreMatchers.not
+import org.hamcrest.Matchers.not
 
+fun venues(func: VenuesRobot.() -> Unit) = VenuesRobot().init().apply { func() }
+
+fun venueDetails(func: DetailsRobot.() -> Unit) = DetailsRobot().apply { func() }
+
+class DetailsRobot : TestRobot() {
+  fun isVisible() {
+    onView(withId(R.id.venueTitle)).check(matches(isDisplayed()))
+  }
+}
 
 class VenuesRobot : TestRobot() {
 
@@ -24,22 +33,18 @@ class VenuesRobot : TestRobot() {
     activityRule.launchActivity(null)
   }
 
-  fun checkVenuesAreDisplayed() = apply {
+  fun isVisible() {
     onView(withId(id.venuesList))
         .check(matches(hasDescendant(withId(id.placeTitle))))
   }
 
-  fun checkProgressBarIsNotDisplayed() = apply {
+  fun isNotLoading() {
     onView(withId(id.progressBar))
         .check(matches(not(isDisplayed())))
   }
 
-  fun clickOnVenue() = apply {
+  fun selectVenue(): DetailsRobot {
     onView(withId(R.id.venuesList)).perform(actionOnItemAtPosition<ViewHolder>(1, click()))
+    return DetailsRobot()
   }
-
-  fun checkSelectedVenueDetailsIsDisplayed() = apply {
-    onView(withId(R.id.venueTitle)).check(matches(isDisplayed()))
-  }
-
 }
