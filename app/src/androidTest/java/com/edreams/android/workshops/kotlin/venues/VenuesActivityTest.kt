@@ -2,7 +2,6 @@ package com.edreams.android.workshops.kotlin.venues
 
 import android.support.test.filters.LargeTest
 import android.support.test.runner.AndroidJUnit4
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -10,22 +9,22 @@ import org.junit.runner.RunWith
 @LargeTest
 class VenuesActivityTest {
 
-  private lateinit var venuesRobot: VenuesRobot
-
-  @Before
-  fun setup() {
-    venuesRobot = VenuesRobot().init()
-  }
-
   @Test
   fun onLoadViewShowsVenues() {
-    venuesRobot.checkVenuesAreDisplayed()
-        .checkProgressBarIsNotDisplayed()
+    venues {
+      isVisible()
+      isNotLoading()
+    }
   }
 
   @Test
   fun onVenueClickShowsDetails() {
-    venuesRobot.clickOnVenue()
-        .checkSelectedVenueDetailsIsDisplayed()
+    venues {
+      isVisible()
+      selectVenue()
+    }
+    venueDetails {
+      isVisible()
+    }
   }
 }
