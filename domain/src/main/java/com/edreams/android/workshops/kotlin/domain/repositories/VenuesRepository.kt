@@ -4,6 +4,6 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 
 interface VenuesRepository {
 
-  fun getVenues(near: String, response: (List<VenueModel>) -> Unit, error: (Throwable) -> Unit)
+  suspend fun getVenues(near: String): List<VenueModel>
 
 }

@@ -11,8 +11,6 @@ class VenuesDataRepository @Inject constructor(
     private val mapper: Mapper<VenueResponse, VenueModel>,
     private val exploreVenuesController: ExploreVenuesController) : VenuesRepository {
 
-  override fun getVenues(near: String, response: (List<VenueModel>) -> Unit,
-      error: (Throwable) -> Unit) = with(exploreVenuesController) {
-    exploreVenues(near, { venues -> response(mapper.map(venues)) }, error)
-  }
+  suspend override fun getVenues(near: String): List<VenueModel> =
+      mapper.map(exploreVenuesController.exploreVenues(near))
 }

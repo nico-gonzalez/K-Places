@@ -4,6 +4,5 @@ import com.edreams.android.workshops.kotlin.data.response.VenueResponse
 
 interface ExploreVenuesController {
 
-  fun exploreVenues(near: String, success: (List<VenueResponse>) -> Unit,
-      error: (Throwable) -> Unit)
+  suspend fun exploreVenues(near: String): List<VenueResponse>
 }

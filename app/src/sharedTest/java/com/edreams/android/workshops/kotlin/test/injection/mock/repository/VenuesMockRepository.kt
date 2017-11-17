@@ -4,10 +4,8 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 
 class VenuesMockRepository : VenuesRepository {
-
-  override fun getVenues(near: String, response: (List<VenueModel>) -> Unit,
-      error: (Throwable) -> Unit) {
-    response(listOf(
+  suspend override fun getVenues(near: String): List<VenueModel> {
+    return listOf(
         VenueModel("1",
             "Sagrada familia",
             3.5f,
@@ -25,6 +23,6 @@ class VenuesMockRepository : VenuesRepository {
             300,
             listOf("Carretera del Triunfo", "3", "Barcelona, Spain"),
             100,
-            "")))
+            ""))
   }
 }

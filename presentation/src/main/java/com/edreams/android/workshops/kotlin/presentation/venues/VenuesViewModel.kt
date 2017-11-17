@@ -23,8 +23,9 @@ class VenuesViewModel @Inject constructor(
 
   fun loadVenues(near: String): LiveData<VenuesUiModel> = venues.apply {
     value = VenuesUiModel.progress()
-    getVenuesInteractor.getVenues(near, { value = VenuesUiModel.success(mapper.map(it)) },
-        { value = VenuesUiModel.error(it.localizedMessage) })
+    getVenuesInteractor.getVenues(near,
+        { value = VenuesUiModel.success(mapper.map(it.value)) },
+        { value = VenuesUiModel.error(it.error.localizedMessage) })
   }
 
   fun onSearch(queryString: String) = venues.apply {
@@ -34,8 +35,9 @@ class VenuesViewModel @Inject constructor(
     }
 
     value = VenuesUiModel.progress()
-    getVenuesInteractor.getVenues(queryString, { value = VenuesUiModel.success(mapper.map(it)) },
-        { value = VenuesUiModel.error(it.localizedMessage) })
+    getVenuesInteractor.getVenues(queryString,
+        { value = VenuesUiModel.success(mapper.map(it.value)) },
+        { value = VenuesUiModel.error(it.error.localizedMessage) })
   }
 
   fun getVenueSelected() = selectedVenue

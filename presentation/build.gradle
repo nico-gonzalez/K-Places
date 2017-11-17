@@ -1,6 +1,9 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 android {
   compileSdkVersion rootProject.androidCompileSdkVersion
   buildToolsVersion rootProject.androidBuildToolsVersion
@@ -35,5 +38,8 @@ dependencies {
   testImplementation presentationTestDependencies.archCoreTesting
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+kotlin {
+  experimental {
+    coroutines "enable"
+  }
+}

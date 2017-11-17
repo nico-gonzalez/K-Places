@@ -34,6 +34,8 @@ dependencies {
   api dataDependencies.retrofitGson
   api dataDependencies.espressoIdlingResource
   implementation dataDependencies.javaxInject
+  implementation dataDependencies.kotlinCoroutines
+  implementation dataDependencies.kotlinCoroutinesAndroid
 
   testImplementation dataTestDependencies.junit
   testImplementation dataTestDependencies.kotlinJUnit
@@ -51,4 +53,10 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
     exclude module: 'recyclerview-v7'
   })
+}
+
+kotlin {
+  experimental {
+    coroutines "enable"
+  }
 }

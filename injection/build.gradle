@@ -40,3 +40,9 @@ dependencies {
   implementation injectionDependencies.javaxInject
   implementation injectionDependencies.archExtensions
 }
+
+kotlin {
+  experimental {
+    coroutines "enable"
+  }
+}
