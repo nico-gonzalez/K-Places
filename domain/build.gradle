@@ -1,5 +1,8 @@
 apply plugin: 'kotlin'
 
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
 dependencies {
   def domainDependencies = rootProject.ext.domainDependencies
   def domainTestDependencies = rootProject.ext.domainTestDependencies
@@ -15,5 +18,8 @@ dependencies {
   testImplementation domainTestDependencies.mockitoKotlin
 }
 
-sourceCompatibility = "1.7"
-targetCompatibility = "1.7"
+kotlin {
+  experimental {
+    coroutines "enable"
+  }
+}

@@ -88,3 +88,9 @@ dependencies {
   })
   kaptAndroidTest appTestDependencies.daggerCompiler
 }
+
+kotlin {
+  experimental {
+    coroutines "enable"
+  }
+}
