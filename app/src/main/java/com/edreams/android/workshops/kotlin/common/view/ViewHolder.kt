@@ -2,6 +2,7 @@ package com.edreams.android.workshops.kotlin.common.view
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.common.extensions.loadCircle
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import kotlinx.android.synthetic.main.venue_item.view.placeImage
@@ -16,7 +17,7 @@ sealed class ViewHolder<in T>(itemView: View) : RecyclerView.ViewHolder(itemView
     override fun bind(data: VenueUiModel) = with(data) {
       itemView.placeTitle.text = title
       itemView.ratingBar.rating = rating
-      itemView.placeImage.loadCircle(photoUrl)
+      itemView.placeImage.loadCircle(photoUrl, R.mipmap.ic_launcher)
     }
   }
 }
