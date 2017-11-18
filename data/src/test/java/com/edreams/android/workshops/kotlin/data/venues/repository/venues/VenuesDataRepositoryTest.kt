@@ -1,8 +1,8 @@
-package com.edreams.android.workshops.kotlin.data.repository.venues
+package com.edreams.android.workshops.kotlin.data.venues.repository.venues
 
-import com.edreams.android.workshops.kotlin.data.net.controller.ExploreVenuesController
-import com.edreams.android.workshops.kotlin.data.repository.VenuesDataRepository
-import com.edreams.android.workshops.kotlin.data.response.VenueResponse
+import com.edreams.android.workshops.kotlin.data.venues.remote.ExploreVenuesController
+import com.edreams.android.workshops.kotlin.data.venues.repository.VenuesDataRepository
+import com.edreams.android.workshops.kotlin.data.venues.remote.response.VenueResponse
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository

@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.data.response
+package com.edreams.android.workshops.kotlin.data.venues.remote.response
 
 data class VenueResponse(val id: String, val name: String, val rating: Float,
     val contact: Contact,
