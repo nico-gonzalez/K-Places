@@ -38,6 +38,7 @@ class VenuesViewModelTest {
   private val TIPS = "A tip"
   private val PHONE = "+(34) 689 16 77 55"
   private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
+  private val QUERY = "Barcelona"
 
   private lateinit var viewModel: VenuesViewModel
 
@@ -122,7 +123,7 @@ class VenuesViewModelTest {
   }
 
   private fun buildMockVenues() = listOf(
-      VenueModel(ID, NAME, RATING, PHOTO, PHONE, DISTANCE, ADDRESS, CHECKINS, TIPS)
+      VenueModel(ID, NAME, RATING, PHOTO, PHONE, DISTANCE, ADDRESS, CHECKINS, TIPS, QUERY)
   )
 
   private fun buildMockVenuesUi() = listOf(

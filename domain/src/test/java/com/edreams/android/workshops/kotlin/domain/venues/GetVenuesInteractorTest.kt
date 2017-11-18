@@ -26,6 +26,7 @@ class GetVenuesInteractorTest {
   private val TIPS = "A tip"
   private val PHONE = "+(34) 689 16 77 55"
   private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
+  private val QUERY = "Barcelona"
 
   private val venuesRepository: VenuesRepository = mock()
   private val success: Callback<GetVenuesResult> = mock()
@@ -71,7 +72,7 @@ class GetVenuesInteractorTest {
   }
 
   private fun buildMockVenues() = GetVenuesResult(listOf(
-      VenueModel(ID, NAME, RATING, PHOTO, PHONE, DISTANCE, ADDRESS, CHECKINS, TIPS))
+      VenueModel(ID, NAME, RATING, PHOTO, PHONE, DISTANCE, ADDRESS, CHECKINS, TIPS, QUERY))
   )
 
 }
