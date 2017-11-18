@@ -18,7 +18,9 @@ open class KotlinWorkshopApplication : Application(), HasActivityInjector {
     DaggerApplicationComponent
         .builder()
         .application(this)
-        .dataComponent(DaggerDataComponent.builder().build())
+        .dataComponent(DaggerDataComponent.builder()
+            .context(this)
+            .build())
         .build()
         .inject(this)
   }

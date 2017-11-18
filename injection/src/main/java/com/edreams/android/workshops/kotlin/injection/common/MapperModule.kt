@@ -1,5 +1,7 @@
 package com.edreams.android.workshops.kotlin.injection.common
 
+import com.edreams.android.workshops.kotlin.data.venues.cache.entity.VenueEntity
+import com.edreams.android.workshops.kotlin.data.venues.mapper.VenueEntityMapper
 import com.edreams.android.workshops.kotlin.data.venues.mapper.VenueMapper
 import com.edreams.android.workshops.kotlin.data.venues.remote.response.VenueResponse
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
@@ -18,5 +20,9 @@ abstract class MapperModule {
 
   @Binds
   abstract fun bindVenueModelMapper(
-      mapper: VenueMapper): Mapper<VenueResponse, VenueModel>
+      mapper: VenueMapper): Mapper<VenueResponse, VenueEntity>
+
+  @Binds
+  abstract fun bindVenueEntityMapper(
+      mapper: VenueEntityMapper): Mapper<VenueEntity, VenueModel>
 }
