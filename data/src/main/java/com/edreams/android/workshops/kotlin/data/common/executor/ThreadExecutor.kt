@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.data.executor
+package com.edreams.android.workshops.kotlin.data.common.executor
 
 import com.edreams.android.workshops.kotlin.domain.common.Suspendable
 import com.edreams.android.workshops.kotlin.domain.interactor.Executor

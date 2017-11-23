@@ -1,6 +1,6 @@
 package com.edreams.android.workshops.kotlin.injection.data
 
-import com.edreams.android.workshops.kotlin.data.net.service.FoursquareService
+import com.edreams.android.workshops.kotlin.data.common.remote.FoursquareService
 import com.edreams.android.workshops.kotlin.injection.BuildConfig
 import dagger.Module
 import dagger.Provides

@@ -39,7 +39,9 @@ ext {
                       retrofitGson           : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
                       javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",
                       kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
-                      kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}"]
+                      kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}",
+                      room                   : "android.arch.persistence.room:runtime:${archExtensionsVersion}",
+                      roomCompiler           : "android.arch.persistence.room:compiler:${archExtensionsVersion}",]
 
   dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
                           kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -48,7 +50,8 @@ ext {
                           espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
                           espressoContrib       : "com.android.support.test.espresso:espresso-contrib:${espressoVersion}",
                           espressoIdlingResource: "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
-                          robolectric           : "org.robolectric:robolectric:${robolectricVersion}"]
+                          robolectric           : "org.robolectric:robolectric:${robolectricVersion}",
+                          roomMigrations        : "android.arch.persistence.room:testing:${archExtensionsVersion}"]
 
   domainDependencies = [kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
                         javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",

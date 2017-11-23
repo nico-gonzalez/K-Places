@@ -6,6 +6,7 @@ import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiMod
 import javax.inject.Inject
 
 class VenuesUiModelMapper @Inject constructor() : Mapper<VenueModel, VenueUiModel> {
+
   override fun map(from: VenueModel): VenueUiModel = with(from) {
     VenueUiModel(name,
         photo,
