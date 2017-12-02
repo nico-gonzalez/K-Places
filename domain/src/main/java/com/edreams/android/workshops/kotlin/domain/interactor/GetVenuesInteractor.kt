@@ -11,15 +11,14 @@ class GetVenuesInteractor @Inject constructor(
     executor: Executor) : BaseInteractor(executor) {
 
   fun getVenues(near: String, success: Callback<GetVenuesResult>,
-      error: Callback<GetVenuesResult>) {
-    postExecute {
-      repository.getVenues(near).consumeEach { venues ->
-        if (venues.isEmpty()) {
-          error(GetVenuesResult(venues, Throwable("No venues where found")))
-        } else {
-          success(GetVenuesResult(venues))
+      error: Callback<GetVenuesResult>) =
+      postExecute {
+        repository.getVenues(near).consumeEach { venues ->
+          if (venues.isEmpty()) {
+            error(GetVenuesResult(venues, Throwable("No venues where found")))
+          } else {
+            success(GetVenuesResult(venues))
+          }
         }
       }
-    }
-  }
 }
