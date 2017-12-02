@@ -1,9 +1,12 @@
 package com.edreams.android.workshops.kotlin.domain.repositories
 
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
+import kotlinx.coroutines.experimental.channels.ProducerJob
 
-interface VenuesRepository {
+typealias VenuesListProducer = ProducerJob<List<VenueModel>>
 
-  suspend fun getVenues(query: String): List<VenueModel>
+interface VenuesRepository : Repository {
+
+  suspend fun getVenues(query: String): VenuesListProducer
 
 }
