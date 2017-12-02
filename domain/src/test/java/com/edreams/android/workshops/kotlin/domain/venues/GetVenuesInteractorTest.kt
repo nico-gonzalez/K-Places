@@ -6,10 +6,12 @@ import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteracto
 import com.edreams.android.workshops.kotlin.domain.interactor.Result
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
-import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.argThat
+import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
+import kotlinx.coroutines.experimental.channels.produce
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -40,35 +42,34 @@ class GetVenuesInteractorTest {
   }
 
   @Test
-  fun `When getVenues success calls explore venues net controller and forwards result to listener`() {
-    val near = "Barcelona"
+  fun `When getVenues success calls explore venues net controller and forwards result to listener`() =
+      runBlocking {
+        val near = "Barcelona"
+        val result = buildMockVenues()
+        whenever(venuesRepository.getVenues(eq(near))) doReturn produce { send(result.value) }
 
-    val result = buildMockVenues()
+        interactor.getVenues(near, success, error)
 
-    runBlocking {
-      whenever(venuesRepository.getVenues(eq(near)))
-          .thenReturn(result.value)
-      interactor.getVenues(near, success, error)
-      verify(venuesRepository).getVenues(eq(near))
-      verify(success).invoke(any())
-    }
-  }
+        verify(venuesRepository).getVenues(eq(near))
+        verify(success).invoke(argThat {
+          value == result.value
+        })
+      }
 
   @Test
-  fun `When getVenues error calls explore venues net controller and forwards result to listener`() {
+  fun `When getVenues error calls explore venues net controller and forwards result to listener`() = runBlocking {
     val near = "Barcelona"
-
-    val errorMessage = "No venues where found"
+    val errorMessage = Throwable("No venues where found")
     val result = Result(emptyList<VenueModel>(),
-        error = Throwable(errorMessage))
+        error = errorMessage)
+    whenever(venuesRepository.getVenues(eq(near))) doReturn produce { send(result.value) }
 
-    runBlocking {
-      whenever(venuesRepository.getVenues(eq(near)))
-          .thenReturn(result.value)
-      interactor.getVenues(near, success, error)
-      verify(venuesRepository).getVenues(eq(near))
-      verify(error).invoke(any())
-    }
+    interactor.getVenues(near, success, error)
+
+    verify(venuesRepository).getVenues(eq(near))
+    verify(error).invoke(argThat {
+      error.message == errorMessage.message
+    })
   }
 
   private fun buildMockVenues() = GetVenuesResult(listOf(

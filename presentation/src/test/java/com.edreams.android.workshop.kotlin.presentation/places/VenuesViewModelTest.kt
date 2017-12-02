@@ -11,6 +11,7 @@ import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
 import com.nhaarman.mockito_kotlin.KArgumentCaptor
 import com.nhaarman.mockito_kotlin.argumentCaptor
+import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
@@ -56,8 +57,7 @@ class VenuesViewModelTest {
 
   @Test
   fun whenPlaceSearchQueryIsEmptyThenAnErrorIsEmitted() {
-    whenever(resourceProvider.emptyVenueSearchErrorMessage())
-        .thenReturn("Empty search error message")
+    whenever(resourceProvider.emptyVenueSearchErrorMessage()) doReturn "Empty search error message"
 
     val emptySearchErrorLiveData = viewModel.getEmptySearchError()
     viewModel.onSearch("")
@@ -91,7 +91,7 @@ class VenuesViewModelTest {
 
     val venues = buildMockVenues()
     val venuesUi = buildMockVenuesUi()
-    whenever(mapper.map(venues)).thenReturn(venuesUi)
+    whenever(mapper.map(venues)) doReturn venuesUi
 
     argumentCaptor<Callback<GetVenuesResult>>().apply {
       verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
@@ -111,7 +111,7 @@ class VenuesViewModelTest {
 
     val venues = buildMockVenues()
     val venuesUi = buildMockVenuesUi()
-    whenever(mapper.map(venues)).thenReturn(venuesUi)
+    whenever(mapper.map(venues)) doReturn venuesUi
 
     argumentCaptor<Callback<GetVenuesResult>>().apply {
       verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
