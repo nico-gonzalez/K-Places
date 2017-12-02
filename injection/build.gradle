@@ -39,6 +39,8 @@ dependencies {
   kapt injectionDependencies.daggerAndroidCompiler
   implementation injectionDependencies.javaxInject
   implementation injectionDependencies.archExtensions
+  implementation injectionDependencies.kotlinCoroutines
+  implementation injectionDependencies.kotlinCoroutinesAndroid
 }
 
 kotlin {

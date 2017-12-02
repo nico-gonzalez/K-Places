@@ -71,6 +71,8 @@ dependencies {
   kapt appDependencies.daggerAndroidCompiler
   implementation appDependencies.javaxInject
   implementation appDependencies.archExtensions
+  implementation appDependencies.kotlinCoroutines
+  implementation appDependencies.kotlinCoroutinesAndroid
 
   testImplementation appTestDependencies.junit
   androidTestImplementation appTestDependencies.junit

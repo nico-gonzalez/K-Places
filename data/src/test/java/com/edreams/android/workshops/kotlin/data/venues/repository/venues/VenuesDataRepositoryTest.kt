@@ -4,7 +4,6 @@ import com.edreams.android.workshops.kotlin.data.venues.cache.dao.VenuesDao
 import com.edreams.android.workshops.kotlin.data.venues.cache.entity.VenueEntity
 import com.edreams.android.workshops.kotlin.data.venues.remote.ExploreVenuesController
 import com.edreams.android.workshops.kotlin.data.venues.remote.response.VenueResponse
-import com.edreams.android.workshops.kotlin.data.venues.repository.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
@@ -39,30 +38,30 @@ class VenuesDataRepositoryTest {
 
   @Before
   fun setup() {
-    repository = VenuesDataRepository(remoteMapper, cacheMapper, exploreVenuesController, venuesDao)
+    repository = VenuesDataRepository(
+        remoteMapper, cacheMapper, exploreVenuesController, venuesDao)
   }
 
   @Test
-  fun whenGetVenuesSuccessCallController() {
+  fun whenGetVenuesSuccessCallController() = runBlocking {
     val near = "Barcelona".toLowerCase()
-    runBlocking {
-      whenever(exploreVenuesController.exploreVenues(eq(near)))
-          .thenReturn(remoteVenues)
-      val result = repository.getVenues(near)
-      verify(exploreVenuesController).exploreVenues(eq(near))
-      assertThat(result, `is`(equalTo(venues)))
-    }
+    whenever(exploreVenuesController.exploreVenues(eq(near))) doReturn remoteVenues
+
+    val result = repository.getVenues(near).receive()
+
+    verify(exploreVenuesController).exploreVenues(eq(near))
+    assertThat(result, `is`(equalTo(venues)))
   }
 
   @Test
-  fun whenGetVenuesFailsCallController() {
+  fun whenGetVenuesFailsCallController() = runBlocking {
     val near = "Barcelona".toLowerCase()
-    runBlocking {
-      whenever(exploreVenuesController.exploreVenues(eq(near)))
-          .thenReturn(emptyList())
-      val result = repository.getVenues(near)
-      verify(exploreVenuesController).exploreVenues(eq(near))
-      assertThat(result.size, `is`(equalTo(0)))
-    }
+    whenever(
+        exploreVenuesController.exploreVenues(eq(near))) doReturn emptyList<VenueResponse>()
+
+    val result = repository.getVenues(near).receive()
+
+    verify(exploreVenuesController).exploreVenues(eq(near))
+    assertThat(result.size, `is`(equalTo(0)))
   }
 }

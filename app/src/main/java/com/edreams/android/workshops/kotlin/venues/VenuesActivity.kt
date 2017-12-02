@@ -125,14 +125,12 @@ class VenuesActivity : AppCompatActivity() {
       venueImage.load(venue.photoUrl)
       venue.formattedAddress?.let {
         venueAddress.text = venue.formattedAddress
-      } ?: run {
-        venueAddress.gone()
-      }
+      } ?: venueAddress.gone()
+
       venue.formattedPhone?.let {
         venuePhone.text = venue.formattedPhone
-      } ?: run {
-        venuePhone.gone()
-      }
+      } ?: venuePhone.gone()
+
     }
     bottomSheet.show()
   }

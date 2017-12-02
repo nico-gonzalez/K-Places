@@ -16,8 +16,6 @@ class ExploreVenuesNetController @Inject constructor(
     val response = service.exploreVenues(near, RESULTS_LIMIT, venuePhotos = PHOTOS_COUNT).execute()
     return response.body()?.let {
       return it.response.groups[0].items.map { it.venue }
-    } ?: run {
-      emptyList<VenueResponse>()
-    }
+    } ?: emptyList()
   }
 }

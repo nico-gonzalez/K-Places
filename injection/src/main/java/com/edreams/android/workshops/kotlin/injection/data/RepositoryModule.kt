@@ -1,6 +1,6 @@
 package com.edreams.android.workshops.kotlin.injection.data
 
-import com.edreams.android.workshops.kotlin.data.venues.repository.VenuesDataRepository
+import com.edreams.android.workshops.kotlin.data.venues.repository.venues.VenuesDataRepository
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import com.edreams.android.workshops.kotlin.injection.common.MapperModule
 import dagger.Binds
