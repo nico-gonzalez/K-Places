@@ -44,20 +44,20 @@ class VenuesActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
+    super.onCreate(savedInstanceState)
     viewModel = ViewModelProviders.of(this, viewModelFactory)
         .get(VenuesViewModel::class.java)
-    super.onCreate(savedInstanceState)
     setContentView(layout.activity_venues)
 
     setupVenuesList()
     setupSearch()
-
     subscribe()
+
+    savedInstanceState ?: viewModel.loadVenues("Barcelona")
   }
 
-
   private fun subscribe() {
-    viewModel.loadVenues("Barcelona").observe(this, Observer {
+    viewModel.venues().observe(this, Observer {
       it?.let {
         if (it.progress) {
           showLoading()
@@ -71,12 +71,12 @@ class VenuesActivity : AppCompatActivity() {
         }
       }
     })
-    viewModel.getEmptySearchError().observe(this, Observer {
+    viewModel.emptySearchError().observe(this, Observer {
       it?.let {
         showEmptySearchError(it)
       }
     })
-    viewModel.getVenueSelected().observe(this, Observer {
+    viewModel.selectedVenue().observe(this, Observer {
       it?.let {
         showVenueDetails(it)
       }
