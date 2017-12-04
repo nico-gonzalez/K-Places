@@ -59,7 +59,7 @@ class VenuesViewModelTest {
   fun whenPlaceSearchQueryIsEmptyThenAnErrorIsEmitted() {
     whenever(resourceProvider.emptyVenueSearchErrorMessage()) doReturn "Empty search error message"
 
-    val emptySearchErrorLiveData = viewModel.getEmptySearchError()
+    val emptySearchErrorLiveData = viewModel.emptySearchError()
     viewModel.onSearch("")
 
     verify(resourceProvider, times(1)).emptyVenueSearchErrorMessage()

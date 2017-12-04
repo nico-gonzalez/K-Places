@@ -21,6 +21,12 @@ class VenuesViewModel @Inject constructor(
   private val emptySearchError: MutableLiveData<String> = MutableLiveData()
   private val selectedVenue: MutableLiveData<VenueUiModel> = SingleLiveEvent()
 
+  fun venues() = venues
+
+  fun selectedVenue() = selectedVenue
+
+  fun emptySearchError() = emptySearchError
+
   fun loadVenues(near: String): LiveData<VenuesUiModel> = venues.apply {
     value = VenuesUiModel.progress()
     getVenuesInteractor.getVenues(near,
@@ -40,11 +46,8 @@ class VenuesViewModel @Inject constructor(
         { value = VenuesUiModel.error(it.error.localizedMessage) })
   }
 
-  fun getVenueSelected() = selectedVenue
-
   fun onVenueSelected(venue: VenueUiModel) = selectedVenue.apply {
     value = venue
   }
 
-  fun getEmptySearchError() = emptySearchError
 }
