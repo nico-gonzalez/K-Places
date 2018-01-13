@@ -100,6 +100,7 @@ class VenuesActivity : AppCompatActivity() {
   }
 
   private fun showError(error: String) {
+    adapter.setPlaces(emptyList())
     Snackbar.make(venuesList, error, LENGTH_SHORT)
         .show()
   }
