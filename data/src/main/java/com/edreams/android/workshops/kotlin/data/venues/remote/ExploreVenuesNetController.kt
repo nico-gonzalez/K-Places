@@ -12,10 +12,7 @@ private const val PHOTOS_COUNT = 1
 class ExploreVenuesNetController @Inject constructor(
     private val service: FoursquareService) : ExploreVenuesController {
 
-  suspend override fun exploreVenues(near: String): List<VenueResponse> {
-    val response = service.exploreVenues(near, RESULTS_LIMIT, venuePhotos = PHOTOS_COUNT).execute()
-    return response.body()?.let {
-      return it.response.groups[0].items.map { it.venue }
-    } ?: emptyList()
-  }
+  suspend override fun exploreVenues(near: String): List<VenueResponse> =
+      service.exploreVenues(near, RESULTS_LIMIT, venuePhotos = PHOTOS_COUNT)
+          .await().response.groups[0].items.map { it.venue }
 }
