@@ -16,7 +16,7 @@ Showcase of a pure Kotlin app that serves as an example of a clean architecture 
   - **Unit tests**
   - **Mockito**
 - **Dagger**
-- **Retrofit + Gson**
+- **Retrofit + Gson + [Kotlin Coroutine Adapter](https://github.com/JakeWharton/retrofit2-kotlin-coroutines-adapter)**
 - **Glide**
 - **Android support library**
   - **Constraint Layout**
