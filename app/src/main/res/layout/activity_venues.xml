@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.edreams.android.workshops.kotlin.venues.VenuesActivity"
     >
 
@@ -79,6 +80,7 @@
           android:layout_height="wrap_content"
           android:layout_marginBottom="8dp"
           android:layout_marginEnd="8dp"
+          android:layout_marginRight="8dp"
           android:layout_marginTop="8dp"
           android:text="Search"
           app:layout_constraintBottom_toBottomOf="parent"
