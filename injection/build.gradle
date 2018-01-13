@@ -41,6 +41,7 @@ dependencies {
   implementation injectionDependencies.archExtensions
   implementation injectionDependencies.kotlinCoroutines
   implementation injectionDependencies.kotlinCoroutinesAndroid
+  implementation injectionDependencies.retrofitCoroutinesAdapter
 }
 
 kotlin {

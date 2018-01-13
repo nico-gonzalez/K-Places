@@ -6,13 +6,13 @@ allprojects {
 }
 
 ext {
-  //Android
+  // Android
   androidBuildToolsVersion = "26.0.2"
   androidMinSdkVersion = 14
   androidTargetSdkVersion = 26
   androidCompileSdkVersion = 26
 
-  //Libraries
+  // Libraries
   supportLibraryVersion = '26.1.0'
   constraintVersion = '1.0.2'
   retrofitVersion = '2.3.0'
@@ -22,8 +22,9 @@ ext {
   javaxInjectVersion = '1'
   archExtensionsVersion = '1.0.0'
   kotlinCoroutinesVersion = '0.19.3'
+  retrofitCoroutinesAdapterVersion = "1.0.0"
 
-  //Testing
+  // Testing
   jUnitVersion = '4.12'
   espressoVersion = '3.0.1'
   runnerVersion = '1.0.1'
@@ -103,15 +104,16 @@ ext {
                          robolectric    : "org.robolectric:robolectric:${robolectricVersion}",
                          daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}"]
 
-  injectionDependencies = [kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
-                           espressoIdlingResource : "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
-                           dagger                 : "com.google.dagger:dagger:${daggerVersion}",
-                           daggerCompiler         : "com.google.dagger:dagger-compiler:${daggerVersion}",
-                           daggerAndroid          : "com.google.dagger:dagger-android:${daggerVersion}",
-                           daggerAndroidSupport   : "com.google.dagger:dagger-android-support:${daggerVersion}",
-                           daggerAndroidCompiler  : "com.google.dagger:dagger-android-processor:${daggerVersion}",
-                           javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",
-                           archExtensions         : "android.arch.lifecycle:extensions:${archExtensionsVersion}",
-                           kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
-                           kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}"]
+  injectionDependencies = [kotlin                   : "org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}",
+                           espressoIdlingResource   : "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
+                           dagger                   : "com.google.dagger:dagger:${daggerVersion}",
+                           daggerCompiler           : "com.google.dagger:dagger-compiler:${daggerVersion}",
+                           daggerAndroid            : "com.google.dagger:dagger-android:${daggerVersion}",
+                           daggerAndroidSupport     : "com.google.dagger:dagger-android-support:${daggerVersion}",
+                           daggerAndroidCompiler    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
+                           javaxInject              : "javax.inject:javax.inject:${javaxInjectVersion}",
+                           archExtensions           : "android.arch.lifecycle:extensions:${archExtensionsVersion}",
+                           kotlinCoroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
+                           kotlinCoroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}",
+                           retrofitCoroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofitCoroutinesAdapterVersion}"]
 }

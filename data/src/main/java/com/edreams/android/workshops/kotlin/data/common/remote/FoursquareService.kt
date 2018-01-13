@@ -4,7 +4,7 @@ import com.edreams.android.workshops.kotlin.data.BuildConfig.FS_CLIENT_ID
 import com.edreams.android.workshops.kotlin.data.BuildConfig.FS_CLIENT_SECRET
 import com.edreams.android.workshops.kotlin.data.venues.remote.response.FourSquareResponse
 import com.edreams.android.workshops.kotlin.data.venues.remote.response.VenuesResponse
-import retrofit2.Call
+import kotlinx.coroutines.experimental.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -18,5 +18,5 @@ interface FoursquareService {
       @Query("near") near: String,
       @Query("limit") limit: Int,
       @Query("venuePhotos") venuePhotos: Int
-  ): Call<FourSquareResponse<VenuesResponse>>
+  ): Deferred<FourSquareResponse<VenuesResponse>>
 }
