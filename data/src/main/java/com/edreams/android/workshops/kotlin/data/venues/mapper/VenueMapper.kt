@@ -12,7 +12,7 @@ class VenueMapper @Inject constructor() : Mapper<VenueResponse, VenueEntity> {
     return VenueEntity(id,
         name,
         rating,
-        buildPhotoUrl(photos.groups[0].items[0]),
+        if (photos.groups.isNotEmpty()) buildPhotoUrl(photos.groups[0].items[0]) else "",
         contact.formattedPhone,
         location.distance,
         location.formattedAddress.joinToString(","),
