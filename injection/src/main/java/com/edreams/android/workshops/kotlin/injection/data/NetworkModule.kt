@@ -2,6 +2,7 @@ package com.edreams.android.workshops.kotlin.injection.data
 
 import com.edreams.android.workshops.kotlin.data.common.remote.FoursquareService
 import com.edreams.android.workshops.kotlin.injection.BuildConfig
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -21,6 +22,7 @@ class NetworkModule {
   fun provideRetrofit(@Named("baseUrl") baseUrl: String): Retrofit = Retrofit.Builder()
       .baseUrl(baseUrl)
       .addConverterFactory(GsonConverterFactory.create())
+      .addCallAdapterFactory(CoroutineCallAdapterFactory())
       .build()
 
   @Singleton
