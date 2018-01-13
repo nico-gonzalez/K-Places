@@ -38,7 +38,7 @@ class QuickReturnBehavior(context: Context, attrs: AttributeSet) : Behavior<View
         && child.visibility == View.VISIBLE
         && !isHiding) {
       hide(child)
-    } else if (dySinceDirectionChange < 0
+    } else if (dySinceDirectionChange < (0 - child.height)
         && child.visibility == View.INVISIBLE
         && !isShowing) {
       show(child)

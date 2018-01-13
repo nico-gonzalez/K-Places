@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.edreams.android.workshops.kotlin.venues.VenuesActivity"
     >
 
@@ -60,15 +61,16 @@
 
       <EditText
           android:id="@+id/near"
-          android:layout_width="232dp"
+          android:layout_width="wrap_content"
           android:layout_height="0dp"
           android:layout_marginEnd="8dp"
           android:layout_marginStart="8dp"
           android:ems="10"
-          android:hint="Find places near me..."
+          android:hint="@string/find_places_near_me"
           android:inputType="textPersonName"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toStartOf="@+id/search"
+          app:layout_constraintHorizontal_bias="0.5"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           />
@@ -78,11 +80,12 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginBottom="8dp"
-          android:layout_marginEnd="8dp"
           android:layout_marginTop="8dp"
-          android:text="Search"
+          android:text="@string/search"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.5"
+          app:layout_constraintStart_toEndOf="@+id/near"
           app:layout_constraintTop_toTopOf="parent"
           style="@style/Widget.AppCompat.Button.Colored"
           />
