@@ -11,7 +11,9 @@ import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvi
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = arrayOf(ExecutorModule::class, MapperModule::class, ViewModelModule::class))
+@Module(includes = [
+  ExecutorModule::class, MapperModule::class, ViewModelModule::class
+])
 class ApplicationModule {
 
   @PerApplication

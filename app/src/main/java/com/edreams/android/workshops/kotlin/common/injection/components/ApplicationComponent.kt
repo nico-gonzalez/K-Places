@@ -11,10 +11,13 @@ import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
 @PerApplication
-@Component(modules = arrayOf(ActivityBindingModule::class,
-    ApplicationModule::class,
-    AndroidSupportInjectionModule::class),
-    dependencies = arrayOf(DataComponent::class))
+@Component(
+    modules = [
+      ActivityBindingModule::class, ApplicationModule::class, AndroidSupportInjectionModule::class
+    ],
+    dependencies = [
+      DataComponent::class
+    ])
 interface ApplicationComponent {
 
   @Component.Builder
