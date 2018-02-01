@@ -17,7 +17,7 @@ class VenueMapper @Inject constructor() : Mapper<VenueResponse, VenueEntity> {
         location.distance,
         location.formattedAddress.joinToString(","),
         stats.checkinsCount,
-        tips?.get(0)?.text
+        if (tips.isEmpty()) null else tips[0].text
     )
 
   }
