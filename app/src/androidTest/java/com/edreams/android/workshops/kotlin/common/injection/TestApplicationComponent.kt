@@ -13,12 +13,13 @@ import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
 
 @PerApplication
-@Component(modules = arrayOf(ActivityBindingModule::class,
-    TestApplicationModule::class,
-    ViewModelModule::class,
-    MapperModule::class,
-    ExecutorModule::class,
-    AndroidSupportInjectionModule::class))
+@Component(modules = [ActivityBindingModule::class,
+  TestApplicationModule::class,
+  ViewModelModule::class,
+  MapperModule::class,
+  ExecutorModule::class,
+  AndroidSupportInjectionModule::class
+])
 interface TestApplicationComponent {
 
   fun venuesRepository(): VenuesRepository

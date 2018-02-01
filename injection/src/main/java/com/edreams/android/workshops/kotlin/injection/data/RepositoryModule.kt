@@ -7,8 +7,7 @@ import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(MapperModule::class, NetworkModule::class,
-    ControllerModule::class))
+@Module(includes = [(MapperModule::class), (NetworkModule::class), (ControllerModule::class)])
 abstract class RepositoryModule {
 
   @Singleton

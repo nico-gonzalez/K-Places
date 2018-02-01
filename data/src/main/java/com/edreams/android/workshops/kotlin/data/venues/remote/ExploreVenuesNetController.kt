@@ -14,7 +14,7 @@ private const val PHOTOS_COUNT = 1
 class ExploreVenuesNetController @Inject constructor(
     private val service: FoursquareService) : ExploreVenuesController {
 
-  suspend override fun exploreVenues(near: String): List<VenueResponse> = try {
+  override suspend fun exploreVenues(near: String): List<VenueResponse> = try {
     service.exploreVenues(near, RESULTS_LIMIT, venuePhotos = PHOTOS_COUNT)
         .await().response.groups[0].items.map { it.venue }
   } catch (http: HttpException) {

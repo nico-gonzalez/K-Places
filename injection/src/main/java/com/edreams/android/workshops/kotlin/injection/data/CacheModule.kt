@@ -8,7 +8,9 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(MapperModule::class))
+@Module(includes = [
+  MapperModule::class
+])
 class CacheModule {
 
   @Singleton
