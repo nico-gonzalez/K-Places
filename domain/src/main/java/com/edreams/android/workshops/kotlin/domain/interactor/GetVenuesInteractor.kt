@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 class GetVenuesInteractor @Inject constructor(
     private val repository: VenuesRepository,
-    executor: Executor) : BaseInteractor(executor) {
+    executor: Executor) : UseCase(executor) {
 
   fun getVenues(near: String, success: Callback<GetVenuesResult>,
       error: Callback<GetVenuesResult>) =
