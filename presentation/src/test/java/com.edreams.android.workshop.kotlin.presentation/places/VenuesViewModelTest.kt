@@ -32,8 +32,8 @@ private const val DISTANCE = 500
 private const val CHECKINS = 200
 private const val TIPS = "A tip"
 private const val PHONE = "+(34) 689 16 77 55"
-private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 private const val QUERY = "Barcelona"
+private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
 class VenuesViewModelTest {
 

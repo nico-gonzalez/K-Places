@@ -17,18 +17,18 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.verify
 
+private const val ID = "1"
+private const val NAME = "Sagrada familia"
+private const val RATING = 3.5f
+private const val PHOTO = "https://cdn.workshop.kotlin.com/image.png"
+private const val DISTANCE = 500
+private const val CHECKINS = 200
+private const val TIPS = "A tip"
+private const val PHONE = "+(34) 689 16 77 55"
+private const val QUERY = "Barcelona"
+private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
 class GetVenuesUseCaseTest {
-  private val ID = "1"
-  private val NAME = "Sagrada familia"
-  private val RATING = 3.5f
-  private val PHOTO = "https://cdn.workshop.kotlin.com/image.png"
-  private val DISTANCE = 500
-  private val CHECKINS = 200
-  private val TIPS = "A tip"
-  private val PHONE = "+(34) 689 16 77 55"
-  private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
-  private val QUERY = "Barcelona"
 
   private val venuesRepository: VenuesRepository = mock()
   private val success: Callback<GetVenuesResult> = mock()
