@@ -29,9 +29,9 @@ class VenuesDataRepository @Inject constructor(
         }
         .toTypedArray()
 
-    remoteVenues.isNotEmpty().let {
+    if (remoteVenues.isNotEmpty()) {
       venuesDao.clearAndInsert(normalizedQuery, remoteVenues)
-      send(cacheMapper.map(venuesDao.findByQuery(normalizedQuery)))
     }
+    send(cacheMapper.map(venuesDao.findByQuery(normalizedQuery)))
   }
 }
