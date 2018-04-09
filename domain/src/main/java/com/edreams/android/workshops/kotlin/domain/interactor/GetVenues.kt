@@ -6,11 +6,11 @@ import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import kotlinx.coroutines.experimental.channels.consumeEach
 import javax.inject.Inject
 
-class GetVenuesInteractor @Inject constructor(
+class GetVenues @Inject constructor(
     private val repository: VenuesRepository,
     executor: Executor) : UseCase(executor) {
 
-  fun getVenues(near: String, success: Callback<GetVenuesResult>,
+  fun execute(near: String, success: Callback<GetVenuesResult>,
       error: Callback<GetVenuesResult>) =
       postExecute {
         repository.getVenues(near).consumeEach { venues ->

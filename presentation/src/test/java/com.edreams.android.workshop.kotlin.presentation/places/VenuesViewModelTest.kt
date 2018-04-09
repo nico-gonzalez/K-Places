@@ -3,7 +3,7 @@ package com.edreams.android.workshop.kotlin.presentation.places
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.edreams.android.workshops.kotlin.domain.common.Callback
 import com.edreams.android.workshops.kotlin.domain.common.GetVenuesResult
-import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
+import com.edreams.android.workshops.kotlin.domain.interactor.GetVenues
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.mapper.VenuesUiModelMapper
 import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvider
@@ -43,7 +43,7 @@ class VenuesViewModelTest {
 
   private lateinit var viewModel: VenuesViewModel
 
-  private val getVenuesInteractor: GetVenuesInteractor = mock()
+  private val getVenues: GetVenues = mock()
   private val mapper: VenuesUiModelMapper = mock()
   private val resourceProvider: ResourceProvider = mock()
 
@@ -52,7 +52,7 @@ class VenuesViewModelTest {
 
   @Before
   fun setup() {
-    viewModel = VenuesViewModel(getVenuesInteractor, mapper, resourceProvider)
+    viewModel = VenuesViewModel(getVenues, mapper, resourceProvider)
   }
 
   @Test
@@ -74,7 +74,7 @@ class VenuesViewModelTest {
     assertThat(venuesLiveData.value?.progress, `is`(true))
 
     argumentCaptor<Callback<GetVenuesResult>>().apply {
-      verify(getVenuesInteractor).getVenues(eq(near), successCaptor.capture(), capture())
+      verify(getVenues).execute(eq(near), successCaptor.capture(), capture())
       lastValue(GetVenuesResult(listOf(), Throwable("An error occurred")))
     }
 
@@ -94,7 +94,7 @@ class VenuesViewModelTest {
     whenever(mapper.map(venues)) doReturn venuesUi
 
     argumentCaptor<Callback<GetVenuesResult>>().apply {
-      verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
+      verify(getVenues).execute(eq(near), capture(), errorCaptor.capture())
       lastValue(GetVenuesResult(venues))
     }
 
@@ -114,7 +114,7 @@ class VenuesViewModelTest {
     whenever(mapper.map(venues)) doReturn venuesUi
 
     argumentCaptor<Callback<GetVenuesResult>>().apply {
-      verify(getVenuesInteractor).getVenues(eq(near), capture(), errorCaptor.capture())
+      verify(getVenues).execute(eq(near), capture(), errorCaptor.capture())
       lastValue(GetVenuesResult(venues))
     }
 
