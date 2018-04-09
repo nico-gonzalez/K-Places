@@ -14,7 +14,7 @@ import com.edreams.android.workshops.kotlin.R.id
 import com.edreams.android.workshops.kotlin.util.TestRobot
 import org.hamcrest.Matchers.not
 
-fun venues(func: VenuesRobot.() -> Unit) = VenuesRobot().init().apply { func() }
+fun venues(func: VenuesRobot.() -> Unit) = VenuesRobot().apply { func() }
 
 fun venueDetails(func: DetailsRobot.() -> Unit) = DetailsRobot().apply { func() }
 
@@ -29,7 +29,7 @@ class VenuesRobot : TestRobot() {
   private var activityRule: ActivityTestRule<VenuesActivity> = ActivityTestRule(
       VenuesActivity::class.java, true, false)
 
-  fun init() = apply {
+  init {
     activityRule.launchActivity(null)
   }
 
