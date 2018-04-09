@@ -3,7 +3,7 @@ package com.edreams.android.workshops.kotlin.presentation.venues
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
+import com.edreams.android.workshops.kotlin.domain.interactor.GetVenues
 import com.edreams.android.workshops.kotlin.domain.mapper.Mapper
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvider
@@ -13,7 +13,7 @@ import com.edreams.android.workshops.kotlin.presentation.viewmodel.SingleLiveEve
 import javax.inject.Inject
 
 class VenuesViewModel @Inject constructor(
-    private val getVenuesInteractor: GetVenuesInteractor,
+    private val getVenues: GetVenues,
     private val mapper: Mapper<VenueModel, VenueUiModel>,
     private val resourceProvider: ResourceProvider) : ViewModel() {
 
@@ -29,7 +29,7 @@ class VenuesViewModel @Inject constructor(
 
   fun loadVenues(near: String): LiveData<VenuesUiModel> = venues.apply {
     value = VenuesUiModel.progress()
-    getVenuesInteractor.getVenues(near,
+    getVenues.execute(near,
         { value = VenuesUiModel.success(mapper.map(it.value)) },
         { value = VenuesUiModel.error(it.error.localizedMessage) })
   }
@@ -41,7 +41,7 @@ class VenuesViewModel @Inject constructor(
     }
 
     value = VenuesUiModel.progress()
-    getVenuesInteractor.getVenues(queryString,
+    getVenues.execute(queryString,
         { value = VenuesUiModel.success(mapper.map(it.value)) },
         { value = VenuesUiModel.error(it.error.localizedMessage) })
   }

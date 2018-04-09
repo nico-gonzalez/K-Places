@@ -6,7 +6,7 @@ import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
 import kotlinx.coroutines.experimental.runBlocking
 
 class VenuesMockRepository : VenuesRepository {
-  suspend override fun getVenues(query: String): VenuesListProducer = runBlocking {
+  override suspend fun getVenues(query: String): VenuesListProducer = runBlocking {
     produce {
       send(listOf(
           VenueModel("1",

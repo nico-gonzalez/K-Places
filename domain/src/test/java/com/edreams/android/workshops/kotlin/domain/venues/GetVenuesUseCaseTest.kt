@@ -2,7 +2,7 @@ package com.edreams.android.workshops.kotlin.domain.venues
 
 import com.edreams.android.workshops.kotlin.domain.common.Callback
 import com.edreams.android.workshops.kotlin.domain.common.GetVenuesResult
-import com.edreams.android.workshops.kotlin.domain.interactor.GetVenuesInteractor
+import com.edreams.android.workshops.kotlin.domain.interactor.GetVenues
 import com.edreams.android.workshops.kotlin.domain.interactor.Result
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 import com.edreams.android.workshops.kotlin.domain.repositories.VenuesRepository
@@ -17,28 +17,28 @@ import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.verify
 
-class GetVenuesInteractorTest {
+private const val ID = "1"
+private const val NAME = "Sagrada familia"
+private const val RATING = 3.5f
+private const val PHOTO = "https://cdn.workshop.kotlin.com/image.png"
+private const val DISTANCE = 500
+private const val CHECKINS = 200
+private const val TIPS = "A tip"
+private const val PHONE = "+(34) 689 16 77 55"
+private const val QUERY = "Barcelona"
+private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
 
-  private val ID = "1"
-  private val NAME = "Sagrada familia"
-  private val RATING = 3.5f
-  private val PHOTO = "https://cdn.workshop.kotlin.com/image.png"
-  private val DISTANCE = 500
-  private val CHECKINS = 200
-  private val TIPS = "A tip"
-  private val PHONE = "+(34) 689 16 77 55"
-  private val ADDRESS = listOf("Carrer de Bailen 67-69", "Barcelona", "Spain")
-  private val QUERY = "Barcelona"
+class GetVenuesUseCaseTest {
 
   private val venuesRepository: VenuesRepository = mock()
   private val success: Callback<GetVenuesResult> = mock()
   private val error: Callback<GetVenuesResult> = mock()
 
-  private lateinit var interactor: GetVenuesInteractor
+  private lateinit var getVenues: GetVenues
 
   @Before
   fun setup() {
-    interactor = GetVenuesInteractor(venuesRepository, BlockingExecutor())
+    getVenues = GetVenues(venuesRepository, BlockingExecutor())
   }
 
   @Test
@@ -48,7 +48,7 @@ class GetVenuesInteractorTest {
         val result = buildMockVenues()
         whenever(venuesRepository.getVenues(eq(near))) doReturn produce { send(result.value) }
 
-        interactor.getVenues(near, success, error)
+        getVenues.execute(near, success, error)
 
         verify(venuesRepository).getVenues(eq(near))
         verify(success).invoke(argThat {
@@ -64,7 +64,7 @@ class GetVenuesInteractorTest {
         error = errorMessage)
     whenever(venuesRepository.getVenues(eq(near))) doReturn produce { send(result.value) }
 
-    interactor.getVenues(near, success, error)
+    getVenues.execute(near, success, error)
 
     verify(venuesRepository).getVenues(eq(near))
     verify(error).invoke(argThat {

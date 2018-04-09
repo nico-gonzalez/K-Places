@@ -16,7 +16,7 @@ class VenuesDataRepository @Inject constructor(
     private val exploreVenuesController: ExploreVenuesController,
     private val venuesDao: VenuesDao) : VenuesRepository {
 
-  suspend override fun getVenues(query: String): VenuesListProducer = produce {
+  override suspend fun getVenues(query: String): VenuesListProducer = produce {
     val normalizedQuery = query.toLowerCase()
     val cachedVenues = venuesDao.findByQuery(normalizedQuery)
     if (cachedVenues.isNotEmpty()) {
@@ -29,7 +29,9 @@ class VenuesDataRepository @Inject constructor(
         }
         .toTypedArray()
 
-    venuesDao.clearAndInsert(normalizedQuery, remoteVenues)
-    send(cacheMapper.map(venuesDao.findByQuery(normalizedQuery)))
+    remoteVenues.isNotEmpty().let {
+      venuesDao.clearAndInsert(normalizedQuery, remoteVenues)
+      send(cacheMapper.map(venuesDao.findByQuery(normalizedQuery)))
+    }
   }
 }

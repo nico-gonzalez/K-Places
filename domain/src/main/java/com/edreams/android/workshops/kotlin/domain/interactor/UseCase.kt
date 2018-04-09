@@ -5,7 +5,7 @@ import com.edreams.android.workshops.kotlin.domain.common.Suspendable
 data class Result<out T>(val value: T,
     val error: Throwable = Throwable())
 
-abstract class BaseInteractor(private val executor: Executor) {
+abstract class UseCase(private val executor: Executor) {
 
   fun <T> postExecute(uiFun: Suspendable<T>) =
       executor.ui(uiFun)
