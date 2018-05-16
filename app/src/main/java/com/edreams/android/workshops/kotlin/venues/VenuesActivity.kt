@@ -33,7 +33,7 @@ class VenuesActivity : AppCompatActivity() {
 
   private lateinit var viewModel: VenuesViewModel
 
-  lateinit var adapter: VenuesAdapter
+  private lateinit var adapter: VenuesAdapter
 
   @Inject internal fun setAdapter(venuesAdapter: VenuesAdapter) {
     adapter = venuesAdapter

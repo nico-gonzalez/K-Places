@@ -1,9 +1,9 @@
 package com.edreams.android.workshops.kotlin.domain.repositories
 
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
-import kotlinx.coroutines.experimental.channels.ProducerJob
+import kotlinx.coroutines.experimental.channels.ReceiveChannel
 
-typealias VenuesListProducer = ProducerJob<List<VenueModel>>
+typealias VenuesListProducer = ReceiveChannel<List<VenueModel>>
 
 interface VenuesRepository : Repository {
 
