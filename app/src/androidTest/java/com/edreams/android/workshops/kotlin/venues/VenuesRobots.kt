@@ -11,7 +11,7 @@ import android.support.test.rule.ActivityTestRule
 import android.support.v7.widget.RecyclerView.ViewHolder
 import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.R.id
-import com.edreams.android.workshops.kotlin.util.TestRobot
+import com.edreams.android.workshops.kotlin.common.TestRobot
 import org.hamcrest.Matchers.not
 
 fun venues(func: VenuesRobot.() -> Unit) = VenuesRobot().apply { func() }

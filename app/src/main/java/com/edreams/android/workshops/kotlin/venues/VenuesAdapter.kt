@@ -30,16 +30,16 @@ class VenuesAdapter @Inject constructor()
 
   override fun getItemCount(): Int = venues.size
 
-  override fun onBindViewHolder(holder: ViewHolder<VenueUiModel>?, position: Int) {
-    holder?.bind(venues[position])
-    holder?.itemView?.setOnClickListener {
+  override fun onBindViewHolder(holder: ViewHolder<VenueUiModel>, position: Int) {
+    holder.bind(venues[position])
+    holder.itemView?.setOnClickListener {
       with(holder.adapterPosition) {
         venueItemClickListener(this, venues[this])
       }
     }
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = parent?.let {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = parent.let {
     PlaceViewHolder(parent.inflater.inflate(layout.venue_item, parent, false))
   }
 

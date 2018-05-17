@@ -11,7 +11,7 @@ class VenuesUiModelMapper @Inject constructor() : Mapper<VenueModel, VenueUiMode
     VenueUiModel(name,
         photo,
         normalizeRating(rating),
-        formattedAddress?.reduce { result, item -> result + ", " + item },
+        formattedAddress?.reduce { result, item -> "$result, $item" },
         formattedPhone
     )
   }

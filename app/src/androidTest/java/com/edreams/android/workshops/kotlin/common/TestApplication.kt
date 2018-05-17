@@ -1,4 +1,4 @@
-package com.edreams.android.workshops.kotlin.util
+package com.edreams.android.workshops.kotlin.common
 
 import android.app.Activity
 import android.app.Application

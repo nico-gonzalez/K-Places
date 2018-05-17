@@ -9,10 +9,10 @@ import com.edreams.android.workshops.kotlin.data.venues.cache.entity.VenueEntity
 @Dao
 abstract class VenuesDao : BaseDao<VenueEntity> {
 
-  @Query("SELECT * FROM venue where query = :query")
+  @Query("SELECT * FROM venue where `query` = :query")
   abstract fun findByQuery(query: String): List<VenueEntity>
 
-  @Query("DELETE from venue where query = :query")
+  @Query("DELETE from venue where `query` = :query")
   abstract fun truncateByQuery(query: String)
 
   @Transaction
