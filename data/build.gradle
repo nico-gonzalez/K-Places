@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
 
 android {
   compileSdkVersion rootProject.androidCompileSdkVersion
@@ -36,13 +37,12 @@ dependencies {
   implementation project(":domain")
 
   implementation dataDependencies.kotlin
-  implementation dataDependencies.gson
   api dataDependencies.retrofit
-  api dataDependencies.retrofitGson
   api dataDependencies.espressoIdlingResource
   implementation dataDependencies.javaxInject
   implementation dataDependencies.kotlinCoroutines
   implementation dataDependencies.kotlinCoroutinesAndroid
+  implementation dataDependencies.kotlinSerialization
   api dataDependencies.room, {
     exclude group: 'com.android.support', module: 'support-core-utils'
   }

@@ -42,6 +42,7 @@ dependencies {
   implementation injectionDependencies.kotlinCoroutines
   implementation injectionDependencies.kotlinCoroutinesAndroid
   implementation injectionDependencies.retrofitCoroutinesAdapter
+  implementation injectionDependencies.retrofitKotlinSerializationConverter
 }
 
 kotlin {

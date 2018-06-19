@@ -2,6 +2,7 @@ allprojects {
   repositories {
     jcenter()
     google()
+    maven { url "https://kotlin.bintray.com/kotlinx" }
   }
 }
 
@@ -16,13 +17,13 @@ ext {
   supportLibraryVersion = '27.1.1'
   constraintVersion = '1.1.0'
   retrofitVersion = '2.4.0'
-  gsonVersion = '2.8.4'
   glideVersion = '4.7.1'
   daggerVersion = '2.16'
   javaxInjectVersion = '1'
   archExtensionsVersion = '1.1.0'
   kotlinCoroutinesVersion = '0.22.5'
   retrofitCoroutinesAdapterVersion = "1.0.0"
+  retrofitKotlinSerializationConverterVersion = "0.0.1"
 
   // Testing
   jUnitVersion = '4.12'
@@ -34,15 +35,14 @@ ext {
   mockitoKotlinVersion = '1.5.0'
 
   dataDependencies = [kotlin                 : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}",
-                      gson                   : "com.google.code.gson:gson:${gsonVersion}",
                       espressoIdlingResource : "com.android.support.test.espresso:espresso-idling-resource:${espressoVersion}",
                       retrofit               : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-                      retrofitGson           : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
                       javaxInject            : "javax.inject:javax.inject:${javaxInjectVersion}",
                       kotlinCoroutines       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
                       kotlinCoroutinesAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}",
                       room                   : "android.arch.persistence.room:runtime:${archExtensionsVersion}",
-                      roomCompiler           : "android.arch.persistence.room:compiler:${archExtensionsVersion}",]
+                      roomCompiler           : "android.arch.persistence.room:compiler:${archExtensionsVersion}",
+                      kotlinSerialization    : "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${kotlinSerializationVersion}"]
 
   dataTestDependencies = [junit                 : "junit:junit:${jUnitVersion}",
                           kotlinJUnit           : "org.jetbrains.kotlin:kotlin-test-junit:${kotlinVersion}",
@@ -115,5 +115,6 @@ ext {
                            archExtensions           : "android.arch.lifecycle:extensions:${archExtensionsVersion}",
                            kotlinCoroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${kotlinCoroutinesVersion}",
                            kotlinCoroutinesAndroid  : "org.jetbrains.kotlinx:kotlinx-coroutines-android:${kotlinCoroutinesVersion}",
-                           retrofitCoroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofitCoroutinesAdapterVersion}"]
+                           retrofitCoroutinesAdapter: "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofitCoroutinesAdapterVersion}",
+                           retrofitKotlinSerializationConverter: "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${retrofitKotlinSerializationConverterVersion}"]
 }
