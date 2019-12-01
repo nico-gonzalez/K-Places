@@ -6,3 +6,4 @@ import com.edreams.android.workshops.kotlin.domain.model.VenueModel
 typealias Callback<T> = (T) -> Unit
 typealias Suspendable<T> = suspend () -> T
 typealias GetVenuesResult = Result<List<VenueModel>>
+typealias GetVenueDetailsResult = Result<VenueModel>

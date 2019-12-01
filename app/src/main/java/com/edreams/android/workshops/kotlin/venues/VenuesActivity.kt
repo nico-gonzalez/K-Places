@@ -1,21 +1,19 @@
 package com.edreams.android.workshops.kotlin.venues
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialog
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.widget.Toast.LENGTH_SHORT
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.edreams.android.workshops.kotlin.R
-import com.edreams.android.workshops.kotlin.R.layout
 import com.edreams.android.workshops.kotlin.common.extensions.gone
 import com.edreams.android.workshops.kotlin.common.extensions.load
 import com.edreams.android.workshops.kotlin.common.extensions.textString
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.Snackbar
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_venues.near
 import kotlinx.android.synthetic.main.activity_venues.progressBar
@@ -29,110 +27,125 @@ import javax.inject.Inject
 
 class VenuesActivity : AppCompatActivity() {
 
-  @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-  private lateinit var viewModel: VenuesViewModel
+    private lateinit var viewModel: VenuesViewModel
 
-  private lateinit var adapter: VenuesAdapter
+    private lateinit var adapter: VenuesAdapter
 
-  @Inject internal fun setAdapter(venuesAdapter: VenuesAdapter) {
-    adapter = venuesAdapter
-    adapter.setVenueItemClickListener { _, venue ->
-      viewModel.onVenueSelected(venue)
-    }
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    AndroidInjection.inject(this)
-    super.onCreate(savedInstanceState)
-    viewModel = ViewModelProviders.of(this, viewModelFactory)
-        .get(VenuesViewModel::class.java)
-    setContentView(layout.activity_venues)
-
-    setupVenuesList()
-    setupSearch()
-    subscribe()
-
-    savedInstanceState ?: viewModel.loadVenues("Barcelona")
-  }
-
-  private fun subscribe() {
-    viewModel.venues().observe(this, Observer {
-      it?.let {
-        if (it.progress) {
-          showLoading()
-        } else {
-          hideLoading()
-          if (it.error.isEmpty()) {
-            showVenues(it.venues)
-          } else {
-            showError(it.error)
-          }
+    @Inject
+    internal fun setAdapter(venuesAdapter: VenuesAdapter) {
+        adapter = venuesAdapter
+        adapter.setVenueItemClickListener { _, venue ->
+            viewModel.onVenueSelected(venue)
         }
-      }
-    })
-    viewModel.emptySearchError().observe(this, Observer {
-      it?.let {
-        showEmptySearchError(it)
-      }
-    })
-    viewModel.selectedVenue().observe(this, Observer {
-      it?.let {
-        showVenueDetails(it)
-      }
-    })
-  }
-
-  private fun setupSearch() {
-    search.setOnClickListener {
-      viewModel.onSearch(near.textString)
     }
-  }
 
-  private fun setupVenuesList() = with(venuesList) {
-    adapter = this@VenuesActivity.adapter
-    layoutManager = LinearLayoutManager(this@VenuesActivity)
-    setHasFixedSize(true)
-  }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+        viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(VenuesViewModel::class.java)
+        setContentView(R.layout.activity_venues)
 
-  private fun showVenues(venues: List<VenueUiModel>) {
-    adapter.setPlaces(venues)
-  }
+        setupVenuesList()
+        setupSearch()
+        subscribe()
 
-  private fun showError(error: String) {
-    adapter.setPlaces(emptyList())
-    Snackbar.make(venuesList, error, LENGTH_SHORT)
-        .show()
-  }
-
-  private fun showLoading() {
-    progressBar.show()
-  }
-
-  private fun hideLoading() {
-    progressBar.hide()
-  }
-
-  private fun showEmptySearchError(message: String) {
-    near.error = message
-  }
-
-  private fun showVenueDetails(venue: VenueUiModel) {
-    val bottomSheet = BottomSheetDialog(this)
-    val bottomSheetView = layoutInflater.inflate(R.layout.venue_details, null)
-    bottomSheet.setContentView(bottomSheetView)
-    with(bottomSheetView) {
-      venueTitle.text = venue.title
-      venueImage.load(venue.photoUrl)
-      venue.formattedAddress?.let {
-        venueAddress.text = venue.formattedAddress
-      } ?: venueAddress.gone()
-
-      venue.formattedPhone?.let {
-        venuePhone.text = venue.formattedPhone
-      } ?: venuePhone.gone()
-
+        savedInstanceState ?: viewModel.loadVenues("Barcelona")
     }
-    bottomSheet.show()
-  }
+
+    private fun subscribe() {
+        viewModel.venues.observe(this, Observer {
+            it?.let {
+                if (it.progress) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                    if (it.error.isEmpty()) {
+                        showVenues(it.venues)
+                    } else {
+                        showGetVenuesError(it.error)
+                    }
+                }
+            }
+        })
+        viewModel.emptySearchError.observe(this, Observer {
+            it?.let { showEmptySearchError(it) }
+        })
+        viewModel.selectedVenue.observe(this, Observer {
+            it?.let {
+                if (it.progress) {
+                    showLoading()
+                } else {
+                    hideLoading()
+                    if (it.error.isEmpty()) {
+                        showVenueDetails(it.venue!!)
+                    } else {
+                        showVenueDetailsError(it.error)
+                    }
+                }
+            }
+        })
+    }
+
+    private fun setupSearch() {
+        search.setOnClickListener {
+            viewModel.onSearch(near.textString)
+        }
+    }
+
+    private fun setupVenuesList() = with(venuesList) {
+        adapter = this@VenuesActivity.adapter
+        layoutManager = LinearLayoutManager(this@VenuesActivity)
+        setHasFixedSize(true)
+    }
+
+    private fun showVenues(venues: List<VenueUiModel>) {
+        adapter.setPlaces(venues)
+    }
+
+    private fun showGetVenuesError(error: String) {
+        adapter.setPlaces(emptyList())
+        Snackbar.make(venuesList, error, Snackbar.LENGTH_SHORT)
+            .show()
+    }
+
+    private fun showLoading() {
+        progressBar.show()
+    }
+
+    private fun hideLoading() {
+        progressBar.hide()
+    }
+
+    private fun showEmptySearchError(message: String) {
+        near.error = message
+    }
+
+    private fun showVenueDetails(venueDetails: VenueUiModel) {
+        venueDetails.run {
+            val bottomSheet = BottomSheetDialog(this@VenuesActivity)
+            val bottomSheetView = layoutInflater.inflate(R.layout.venue_details, null)
+            bottomSheet.setContentView(bottomSheetView)
+            bottomSheetView.apply {
+                venueTitle.text = venueDetails.title
+                venueImage.load(venueDetails.photoUrl)
+                venueDetails.formattedAddress?.let {
+                    venueAddress.text = venueDetails.formattedAddress
+                } ?: venueAddress.gone()
+
+                venueDetails.formattedPhone?.let {
+                    venuePhone.text = venueDetails.formattedPhone
+                } ?: venuePhone.gone()
+            }
+            bottomSheet.show()
+        }
+    }
+
+    private fun showVenueDetailsError(error: String) {
+        Snackbar.make(venuesList, error, Snackbar.LENGTH_SHORT)
+            .show()
+    }
 }

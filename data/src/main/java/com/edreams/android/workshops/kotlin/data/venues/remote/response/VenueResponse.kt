@@ -4,12 +4,16 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 @Serializable
-data class VenueResponse(val id: String, val name: String, @Transient val rating: Float = 0f,
-    val contact: Contact,
-    val location: Location,
-    val stats: Stats,
-    @Transient val tips: List<Tip> = emptyList(),
-    val photos: Response<PhotoResponse>)
+data class VenueResponse(
+  val id: String,
+  val name: String,
+  @Transient val rating: Float = 0f,
+  @Transient val contact: Contact? = null,
+  @Transient val location: Location? = null,
+  @Transient val stats: Stats? = null,
+  @Transient val tips: List<Tip> = emptyList(),
+  val photos: Response<PhotoResponse>
+)
 
 @Serializable
 data class Contact(@Transient val formattedPhone: String = "")

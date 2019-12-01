@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "ba8e54f193092b3adce56ece8ed0b87a",
+    "identityHash": "53b616ec648b9b36184b4cf3643bb8bc",
     "entities": [
       {
         "tableName": "venue",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `rating` REAL NOT NULL, `photo` TEXT NOT NULL, `formattedPhone` TEXT, `distance` INTEGER NOT NULL, `formattedAddress` TEXT, `checkinsCount` INTEGER NOT NULL, `tips` TEXT, `query` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `name` TEXT NOT NULL, `rating` REAL NOT NULL, `photo` TEXT, `formattedPhone` TEXT, `distance` INTEGER, `formattedAddress` TEXT, `checkinsCount` INTEGER, `tips` TEXT, `query` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -30,7 +30,7 @@
             "fieldPath": "photo",
             "columnName": "photo",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "formattedPhone",
@@ -42,7 +42,7 @@
             "fieldPath": "distance",
             "columnName": "distance",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "formattedAddress",
@@ -54,7 +54,7 @@
             "fieldPath": "checkinsCount",
             "columnName": "checkinsCount",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "tips",
@@ -90,7 +90,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ba8e54f193092b3adce56ece8ed0b87a\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"53b616ec648b9b36184b4cf3643bb8bc\")"
     ]
   }
 }

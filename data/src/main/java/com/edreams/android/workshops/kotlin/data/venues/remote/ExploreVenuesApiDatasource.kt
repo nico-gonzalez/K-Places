@@ -5,22 +5,32 @@ import com.edreams.android.workshops.kotlin.data.venues.remote.response.VenueRes
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
-import javax.inject.Singleton
 
 private const val RESULTS_LIMIT = 50
 private const val PHOTOS_COUNT = 1
 
-@Singleton
-class ExploreVenuesNetController @Inject constructor(
-    private val service: FoursquareService) : ExploreVenuesController {
+class ExploreVenuesApiDatasource @Inject constructor(
+  private val service: FoursquareService
+) : ExploreVenuesDatasource {
 
   override suspend fun exploreVenues(near: String): List<VenueResponse> = try {
-    service.exploreVenues(near, RESULTS_LIMIT, venuePhotos = PHOTOS_COUNT)
-        .await().response.groups[0].items.map { it.venue }
+    service.exploreVenues(
+      near,
+      RESULTS_LIMIT,
+      venuePhotos = PHOTOS_COUNT
+    ).response.groups.first().items.map { it.venue }
   } catch (http: HttpException) {
     emptyList()
   } catch (network: IOException) {
     emptyList()
+  }
+
+  override suspend fun getVenueDetails(id: String): VenueResponse? = try {
+    service.getVenueDetails(id).response.venue
+  } catch (http: HttpException) {
+    null
+  } catch (network: IOException) {
+    null
   }
 }
 

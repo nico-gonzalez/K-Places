@@ -1,12 +1,13 @@
 package com.edreams.android.workshops.kotlin.domain.repositories
 
 import com.edreams.android.workshops.kotlin.domain.model.VenueModel
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 
-typealias VenuesListProducer = ReceiveChannel<List<VenueModel>>
+typealias VenuesList = Flow<List<VenueModel>>
 
-interface VenuesRepository : Repository {
+interface VenuesRepository {
 
-  suspend fun getVenues(query: String): VenuesListProducer
+    fun getVenues(query: String): VenuesList
 
+    fun getVenueDetails(id: String): Flow<VenueModel>
 }

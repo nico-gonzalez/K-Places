@@ -1,8 +1,8 @@
 package com.edreams.android.workshops.kotlin.domain.interactor
 
 import com.edreams.android.workshops.kotlin.domain.common.Suspendable
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Job
 
 interface Executor {
 

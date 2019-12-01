@@ -1,7 +1,7 @@
 package com.edreams.android.workshops.kotlin.common.view
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.common.extensions.loadCircle
 import com.edreams.android.workshops.kotlin.presentation.venues.model.VenueUiModel

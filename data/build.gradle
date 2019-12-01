@@ -13,7 +13,7 @@ android {
     minSdkVersion rootProject.androidMinSdkVersion
     targetSdkVersion rootProject.androidTargetSdkVersion
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     javaCompileOptions {
       annotationProcessorOptions {
@@ -40,9 +40,9 @@ dependencies {
   api dataDependencies.retrofit
   api dataDependencies.espressoIdlingResource
   implementation dataDependencies.javaxInject
-  implementation dataDependencies.kotlinCoroutines
   implementation dataDependencies.kotlinCoroutinesAndroid
   implementation dataDependencies.kotlinSerialization
+  api "com.squareup.okhttp3:logging-interceptor:4.2.1"
   api dataDependencies.room, {
     exclude group: 'com.android.support', module: 'support-core-utils'
   }
@@ -65,10 +65,4 @@ dependencies {
     exclude group: 'com.android.support', module: 'support-annotations'
     exclude module: 'recyclerview-v7'
   })
-}
-
-kotlin {
-  experimental {
-    coroutines "enable"
-  }
 }

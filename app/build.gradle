@@ -71,7 +71,6 @@ dependencies {
   kapt appDependencies.daggerAndroidCompiler
   implementation appDependencies.javaxInject
   implementation appDependencies.archExtensions
-  implementation appDependencies.kotlinCoroutines
   implementation appDependencies.kotlinCoroutinesAndroid
 
   testImplementation appTestDependencies.junit
@@ -89,10 +88,4 @@ dependencies {
     exclude module: 'recyclerview-v7'
   })
   kaptAndroidTest appTestDependencies.daggerCompiler
-}
-
-kotlin {
-  experimental {
-    coroutines "enable"
-  }
 }

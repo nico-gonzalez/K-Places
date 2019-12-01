@@ -1,10 +1,10 @@
 package com.edreams.android.workshops.kotlin.common.extensions
 
-import android.support.annotation.DrawableRes
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.bumptech.glide.request.RequestOptions.placeholderOf
@@ -23,9 +23,9 @@ fun ImageView.load(url: String) {
 
 fun ImageView.loadCircle(url: String, @DrawableRes placeholderId: Int) {
   Glide.with(context).load(url)
-      .apply(placeholderOf(placeholderId))
-      .apply(circleCropTransform())
-      .into(this)
+    .apply(placeholderOf(placeholderId))
+    .apply(circleCropTransform())
+    .into(this)
 }
 
 val TextView.textString get() = this.text.toString()

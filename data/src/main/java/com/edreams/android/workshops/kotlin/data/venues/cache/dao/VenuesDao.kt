@@ -1,8 +1,8 @@
 package com.edreams.android.workshops.kotlin.data.venues.cache.dao
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Transaction
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Transaction
 import com.edreams.android.workshops.kotlin.data.common.cache.BaseDao
 import com.edreams.android.workshops.kotlin.data.venues.cache.entity.VenueEntity
 
@@ -20,4 +20,7 @@ abstract class VenuesDao : BaseDao<VenueEntity> {
     truncateByQuery(query)
     return insert(items)
   }
+
+  @Query("SELECT * FROM venue where `id` = :id")
+  abstract fun findBy(id: String): VenueEntity
 }

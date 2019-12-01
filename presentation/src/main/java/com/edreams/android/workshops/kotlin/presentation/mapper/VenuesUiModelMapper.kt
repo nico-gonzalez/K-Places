@@ -7,14 +7,16 @@ import javax.inject.Inject
 
 class VenuesUiModelMapper @Inject constructor() : Mapper<VenueModel, VenueUiModel> {
 
-  override fun map(from: VenueModel): VenueUiModel = with(from) {
-    VenueUiModel(name,
-        photo,
-        normalizeRating(rating),
-        formattedAddress?.reduce { result, item -> "$result, $item" },
-        formattedPhone
-    )
-  }
+    override fun map(from: VenueModel): VenueUiModel = with(from) {
+        VenueUiModel(
+            id,
+            name,
+            photo ?: "",
+            normalizeRating(rating),
+            formattedAddress?.reduce { result, item -> "$result, $item" },
+            formattedPhone
+        )
+    }
 
-  private fun normalizeRating(rating: Float) = rating * 5f / 10f
+    private fun normalizeRating(rating: Float) = rating * 5f / 10f
 }

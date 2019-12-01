@@ -9,17 +9,16 @@ import javax.inject.Inject
 class VenueMapper @Inject constructor() : Mapper<VenueResponse, VenueEntity> {
 
   override fun map(from: VenueResponse): VenueEntity = with(from) {
-    return VenueEntity(id,
+     VenueEntity(id,
         name,
         rating,
         if (photos.groups.isNotEmpty()) buildPhotoUrl(photos.groups[0].items[0]) else "",
-        contact.formattedPhone,
-        location.distance,
-        location.formattedAddress.joinToString(","),
-        stats.checkinsCount,
+        contact?.formattedPhone,
+        location?.distance,
+        location?.formattedAddress?.joinToString(","),
+        stats?.checkinsCount,
         if (tips.isEmpty()) null else tips[0].text
     )
-
   }
 
   private fun buildPhotoUrl(photo: PhotoResponse): String = with(photo) {

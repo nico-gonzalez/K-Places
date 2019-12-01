@@ -7,10 +7,13 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [
-  RepositoryModule::class, CacheModule::class
-])
+@Component(
+  modules = [
+    RepositoryModule::class, CacheModule::class
+  ]
+)
 interface DataComponent {
+
   fun venuesRepository(): VenuesRepository
 
   @Component.Builder

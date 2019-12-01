@@ -31,16 +31,11 @@ dependencies {
   implementation presentationDependencies.kotlin
   implementation presentationDependencies.javaxInject
   implementation presentationDependencies.archExtensions
-  implementation presentationDependencies.kotlinCoroutines
+//  implementation presentationDependencies.viewModelExtensions
+  implementation group: 'androidx.lifecycle', name:'lifecycle-viewmodel-ktx', version: '2.1.0'
 
   testImplementation presentationTestDependencies.kotlinJUnit
   testImplementation presentationTestDependencies.mockito
   testImplementation presentationTestDependencies.mockitoKotlin
   testImplementation presentationTestDependencies.archCoreTesting
-}
-
-kotlin {
-  experimental {
-    coroutines "enable"
-  }
 }

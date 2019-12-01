@@ -7,6 +7,6 @@ import com.edreams.android.workshops.kotlin.presentation.resources.ResourceProvi
 class AndroidResourceProvider(private val context: Context) : ResourceProvider {
 
   override fun emptyVenueSearchErrorMessage(): String =
-      context.getString(R.string.empty_search_message)
+    context.getString(R.string.empty_search_message)
 
 }

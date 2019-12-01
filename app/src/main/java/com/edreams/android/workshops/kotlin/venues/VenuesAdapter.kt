@@ -1,9 +1,9 @@
 package com.edreams.android.workshops.kotlin.venues
 
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import com.edreams.android.workshops.kotlin.R.layout
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.edreams.android.workshops.kotlin.R
 import com.edreams.android.workshops.kotlin.common.extensions.inflater
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder
 import com.edreams.android.workshops.kotlin.common.view.ViewHolder.PlaceViewHolder
@@ -32,7 +32,7 @@ class VenuesAdapter @Inject constructor()
 
   override fun onBindViewHolder(holder: ViewHolder<VenueUiModel>, position: Int) {
     holder.bind(venues[position])
-    holder.itemView?.setOnClickListener {
+    holder.itemView.setOnClickListener {
       with(holder.adapterPosition) {
         venueItemClickListener(this, venues[this])
       }
@@ -40,7 +40,7 @@ class VenuesAdapter @Inject constructor()
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = parent.let {
-    PlaceViewHolder(parent.inflater.inflate(layout.venue_item, parent, false))
+    PlaceViewHolder(parent.inflater.inflate(R.layout.venue_item, parent, false))
   }
 
   private class VenuesDiffCallback(private val oldVenues: List<VenueUiModel>,

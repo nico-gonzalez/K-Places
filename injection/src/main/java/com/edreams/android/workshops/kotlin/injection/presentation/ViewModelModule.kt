@@ -1,7 +1,7 @@
 package com.edreams.android.workshops.kotlin.injection.presentation
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.edreams.android.workshops.kotlin.presentation.venues.VenuesViewModel
 import dagger.Binds
 import dagger.Module

@@ -15,14 +15,11 @@ import dagger.Module
 abstract class MapperModule {
 
   @Binds
-  abstract fun bindVenueUiModelMapper(
-      mapper: VenuesUiModelMapper): Mapper<VenueModel, VenueUiModel>
+  abstract fun bindVenueUiModelMapper(mapper: VenuesUiModelMapper): Mapper<VenueModel, VenueUiModel>
 
   @Binds
-  abstract fun bindVenueModelMapper(
-      mapper: VenueMapper): Mapper<VenueResponse, VenueEntity>
+  abstract fun bindVenueModelMapper(mapper: VenueMapper): Mapper<VenueResponse, VenueEntity>
 
   @Binds
-  abstract fun bindVenueEntityMapper(
-      mapper: VenueEntityMapper): Mapper<VenueEntity, VenueModel>
+  abstract fun bindVenueEntityMapper(mapper: VenueEntityMapper): Mapper<VenueEntity, VenueModel>
 }

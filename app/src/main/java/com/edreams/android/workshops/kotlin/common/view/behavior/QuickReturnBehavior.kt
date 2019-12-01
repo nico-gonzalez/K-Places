@@ -2,12 +2,12 @@ package com.edreams.android.workshops.kotlin.common.view.behavior
 
 import android.animation.Animator
 import android.content.Context
-import android.support.design.widget.CoordinatorLayout
-import android.support.design.widget.CoordinatorLayout.Behavior
-import android.support.v4.view.ViewCompat
-import android.support.v4.view.animation.FastOutSlowInInterpolator
+import androidx.core.view.ViewCompat
 import android.util.AttributeSet
 import android.view.View
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior
+import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 
 class QuickReturnBehavior(context: Context, attrs: AttributeSet) : Behavior<View>(context, attrs) {
 

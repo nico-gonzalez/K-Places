@@ -1,14 +1,15 @@
 package com.edreams.android.workshops.kotlin.injection.presentation
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.edreams.android.workshops.kotlin.injection.scopes.PerApplication
 import javax.inject.Inject
 import javax.inject.Provider
 
 @PerApplication
 class ViewModelFactory @Inject constructor(
-    private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
+  private val creators: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
+) : ViewModelProvider.Factory {
 
   @Suppress("UNCHECKED_CAST")
   override fun <T : ViewModel> create(modelClass: Class<T>): T {

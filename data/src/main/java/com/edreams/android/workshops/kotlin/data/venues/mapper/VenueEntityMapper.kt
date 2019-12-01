@@ -7,17 +7,18 @@ import javax.inject.Inject
 
 class VenueEntityMapper @Inject constructor() : Mapper<VenueEntity, VenueModel> {
 
-  override fun map(from: VenueEntity): VenueModel = with(from) {
-    return VenueModel(id,
-        name,
-        rating,
-        photo,
-        formattedPhone,
-        distance,
-        formattedAddress?.split(","),
-        checkinsCount,
-        tips,
-        query
-    )
-  }
+    override fun map(from: VenueEntity): VenueModel = with(from) {
+        VenueModel(
+            id,
+            name,
+            rating,
+            photo,
+            formattedPhone,
+            distance ?: 0,
+            formattedAddress?.split(","),
+            checkinsCount ?: 0,
+            tips,
+            query
+        )
+    }
 }

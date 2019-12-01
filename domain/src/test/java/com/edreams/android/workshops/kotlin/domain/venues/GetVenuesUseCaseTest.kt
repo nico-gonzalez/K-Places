@@ -11,8 +11,8 @@ import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
-import kotlinx.coroutines.experimental.channels.produce
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito.verify
